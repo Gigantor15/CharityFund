@@ -7,5 +7,5 @@ Feature: Make Charity Event
 Scenario:
 Given I have a charity organization
 When I make an event
-Then I can recieve donations
+Then I have new event page on my homepage
 
