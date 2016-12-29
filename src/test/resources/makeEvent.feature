@@ -7,5 +7,5 @@ Feature: Make Charity Event
 Scenario:
 Given I have a charity organization
 When I make an event
-Then I have new event page on my homepage
+Then I have new event listing on my homepage
 
