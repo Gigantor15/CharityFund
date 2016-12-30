@@ -21,8 +21,7 @@ Feature: Make Donation
       |    1000 |      200 |       800 |
       |    5000 |     1000 |      4000 |
       |    3000 |     2000 |      1000 |
-      |       0 |      500 |      -500 |
-      |     600 |      600 |         0 |
+
 
   Scenario Outline: 
     Given I have a bank account
