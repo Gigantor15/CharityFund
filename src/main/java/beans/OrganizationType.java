@@ -3,18 +3,21 @@ package beans;
 import javax.persistence.*;
 
 @Entity()
-@Table(name="CHARITY_ORGANIZATION_TYPE")
+@Table(name = "CHARITY_ORGANIZATION_TYPE")
 public class OrganizationType {
-	
+
 	@Id
-	@Column(name="ORGANIZATION_TYPE_ID")
-	//@GeneratedValue(strategy=GenerationType.AUTO) // HIBERNATE_SEQUENCE
+	@Column(name = "ORGANIZATION_TYPE_ID")
 	private int id;
-	
-	@Column(name="ORGANIZATION_TYPE_NAME")
+
+	@Column(name = "ORGANIZATION_TYPE_NAME")
 	private String type;
 
-	
+	public OrganizationType() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public OrganizationType(int id, String type) {
 		this.id = id;
 		this.type = type;

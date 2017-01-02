@@ -1,11 +1,28 @@
 package beans;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "CHARITY_BANK")
 public class BankAccount {
 
+	@Id
+	@Column(name = "BANK_ID")
 	private int id;
+
+	@Column(name = "BANK_ACCOUNT_NUMBER")
 	private int accountNumber;
+
+	@Column(name = "BANK_ACCOUNT_ROUTING_NUMBER")
 	private int routingNumber;
+
+	@Column(name = "BANK_ACCOUNT_BALANCE")
 	private double balance;
+	
+
+	public BankAccount() {
+		super();
+	}
 
 	public BankAccount(int id, int accountNumber, int routingNumber, double balance) {
 		super();
