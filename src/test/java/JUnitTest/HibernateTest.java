@@ -7,13 +7,43 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import DataTier.UserRoleDAO;
+import DataTier.BankAccountDAO;
 import beans.BankAccount;
 import beans.OrganizationType;
+import beans.User;
 import beans.UserRole;
 
 public class HibernateTest {
 	private SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	
+	
+	/*
+	 * UserInsert() is not working
+	 * 8585 [main] WARN org.hibernate.util.JDBCExceptionReporter - SQL Error: 904, SQLState: 42000
+     * 8585 [main] ERROR org.hibernate.util.JDBCExceptionReporter - ORA-00904: "USERROLE_USER_ROLE_ID": invalid identifier
+	 */
+	@Test
+	public void testUserInsert() {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		UserRoleDAO daoRole = new UserRoleDAO();
+		BankAccountDAO daoBank = new BankAccountDAO();
+
+		UserRole role = daoRole.load(1001);			daoRole.closeSessionFactory();
+		BankAccount bankAccount = daoBank.load(1);	daoBank.closeSessionFactory();
+		
+		System.out.println(bankAccount);
+		System.out.println(role);
+		
+		User user1 = new User(10001, "Dan", "Pickle", "user", "pass", "dan@pickle.com", bankAccount, role);
+		
+		session.save(user1);
+
+		tx.commit();
+		session.close();
+	}
 	
 	@Test
 	@Ignore

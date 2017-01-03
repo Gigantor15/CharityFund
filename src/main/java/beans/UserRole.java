@@ -2,7 +2,7 @@ package beans;
 
 import javax.persistence.*;
 
-@Entity()
+@Entity
 @Table(name = "CHARITY_USER_ROLE")
 public class UserRole {
 
@@ -15,7 +15,6 @@ public class UserRole {
 
 	public UserRole() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public UserRole(int id, String role) {
