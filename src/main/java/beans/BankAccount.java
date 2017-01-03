@@ -1,73 +1,69 @@
-package beans;
+package com.project.beans;
 
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 
 @Entity
-@Table(name = "CHARITY_BANK")
 public class BankAccount {
-
-	@Id
-	@Column(name = "BANK_ID")
-	private int id;
-
-	@Column(name = "BANK_ACCOUNT_NUMBER")
-	private int accountNumber;
-
-	@Column(name = "BANK_ACCOUNT_ROUTING_NUMBER")
-	private int routingNumber;
-
-	@Column(name = "BANK_ACCOUNT_BALANCE")
-	private double balance;
 	
-
-	public BankAccount() {
-		super();
-	}
-
-	public BankAccount(int id, int accountNumber, int routingNumber, double balance) {
-		super();
-		this.id = id;
-		this.accountNumber = accountNumber;
-		this.routingNumber = routingNumber;
-		this.balance = balance;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getAccountNumber() {
-		return accountNumber;
-	}
-
-	public void setAccountNumber(int accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	public int getRoutingNumber() {
-		return routingNumber;
-	}
-
-	public void setRoutingNumber(int routingNumber) {
-		this.routingNumber = routingNumber;
-	}
-
-	public double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-
+	@Id
+	@Column(name="BANK_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int bankId;
+	
+	@Column(name="BANK_ACCOUNT_NUMBER", nullable=false, unique=true, length=9, updatable=false)
+	private int accountNum;
+	
+	@Column(name="BANK_ACCOUNT_ROUTING_NUMBER", nullable=false, length=9, updatable=false)
+	private int routingNum;
+	
+	@Column(name="BANK_ACCOUNT_BALANCE", nullable=false, unique=true, updatable=true)
+	private float balance;
 	@Override
 	public String toString() {
-		return "BankAccount [id=" + id + ", accountNumber=" + accountNumber + ", routingNumber=" + routingNumber
+		return "BankAccount [bankId=" + bankId + ", accountNum=" + accountNum + ", routingNum=" + routingNum
 				+ ", balance=" + balance + "]";
 	}
-
+	public int getBankId() {
+		return bankId;
+	}
+	public void setBankId(int bankId) {
+		this.bankId = bankId;
+	}
+	public int getAccountNum() {
+		return accountNum;
+	}
+	public void setAccountNum(int accountNum) {
+		this.accountNum = accountNum;
+	}
+	public int getRoutingNum() {
+		return routingNum;
+	}
+	public void setRoutingNum(int routingNum) {
+		this.routingNum = routingNum;
+	}
+	public float getBalance() {
+		return balance;
+	}
+	public void setBalance(float balance) {
+		this.balance = balance;
+	}
+	public BankAccount(int bankId, int accountNum, int routingNum, float balance) {
+		super();
+		this.bankId = bankId;
+		this.accountNum = accountNum;
+		this.routingNum = routingNum;
+		this.balance = balance;
+	}
+	public BankAccount() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 }
