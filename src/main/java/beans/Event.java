@@ -1,4 +1,4 @@
-package com.project.beans;
+package beans;
 
 import java.sql.Timestamp;
 import javax.persistence.Cacheable;

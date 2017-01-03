@@ -1,7 +1,7 @@
-package com.project.beans;
+package beans;
 
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 
 @Entity
+@Table(name="CHARITY_BANK")
 public class BankAccount {
 	
 	@Id
@@ -22,8 +23,8 @@ public class BankAccount {
 	@Column(name="BANK_ACCOUNT_ROUTING_NUMBER", nullable=false, length=9, updatable=false)
 	private int routingNum;
 	
-	@Column(name="BANK_ACCOUNT_BALANCE", nullable=false, unique=true, updatable=true)
-	private float balance;
+	@Column(name="BANK_ACCOUNT_BALANCE", nullable=false, updatable=true)
+	private double balance;
 	@Override
 	public String toString() {
 		return "BankAccount [bankId=" + bankId + ", accountNum=" + accountNum + ", routingNum=" + routingNum
@@ -47,14 +48,13 @@ public class BankAccount {
 	public void setRoutingNum(int routingNum) {
 		this.routingNum = routingNum;
 	}
-	public float getBalance() {
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(float balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	public BankAccount(int bankId, int accountNum, int routingNum, float balance) {
-		super();
+	public BankAccount(int bankId, int accountNum, int routingNum, double balance) {
 		this.bankId = bankId;
 		this.accountNum = accountNum;
 		this.routingNum = routingNum;

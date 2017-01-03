@@ -1,5 +1,5 @@
 
-package com.project.beans;
+package beans;
 
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;

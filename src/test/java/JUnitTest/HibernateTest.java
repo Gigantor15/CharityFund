@@ -51,7 +51,7 @@ public class HibernateTest {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
 		
-		BankAccount acct1  = new BankAccount(1, 111, 100, 90.65);
+		BankAccount acct1 =  new BankAccount(2, 123456789, 123456789, 100.23);
 		session.save(acct1);
 		
 		tx.commit();
