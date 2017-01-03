@@ -8,7 +8,7 @@
 			oracle.jdbc.OracleDriver
 		</property>
 		<property name="hibernate.connection.url">
-			jdbc:oracle:thin:@localhost:1521:xe
+			jdbc:oracle:thin:@orcl.csyh92ll2is8.us-west-2.rds.amazonaws.com:1521:orcl
 		</property>
 		<property name="hibernate.connection.username">demo</property>
 		<property name="hibernate.connection.password">welcome1</property>
@@ -17,5 +17,9 @@
 			org.hibernate.dialect.Oracle10gDialect
 		</property>
 		<property name="show_sql">true</property>
+
+		<mapping class="beans.OrganizationType"></mapping>
+		<mapping class="beans.BankAccount"></mapping>
+		<mapping class="beans.UserRole"></mapping>
 	</session-factory>
 </hibernate-configuration>
