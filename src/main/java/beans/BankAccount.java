@@ -2,10 +2,6 @@ package beans;
 
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 
 @Entity
@@ -13,8 +9,7 @@ import javax.persistence.Id;
 public class BankAccount {
 	
 	@Id
-	@Column(name="BANK_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="BANK_ACCOUNT_ID")
 	private int bankId;
 	
 	@Column(name="BANK_ACCOUNT_NUMBER", nullable=false, unique=true, length=9, updatable=false)

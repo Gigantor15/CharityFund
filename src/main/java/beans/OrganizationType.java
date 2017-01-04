@@ -15,7 +15,6 @@ public class OrganizationType {
 
 	public OrganizationType() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public OrganizationType(int id, String type) {

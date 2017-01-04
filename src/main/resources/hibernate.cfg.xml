@@ -22,5 +22,6 @@
 		<mapping class="beans.BankAccount"></mapping>
 		<mapping class="beans.UserRole"></mapping>
 		<mapping class="beans.User"></mapping>
+		<mapping class="beans.Organization"></mapping>
 	</session-factory>
 </hibernate-configuration>

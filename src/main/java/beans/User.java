@@ -25,12 +25,12 @@ public class User {
 	@Column(name = "USER_EMAIL")
 	private String email;
 
-	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_BANK_ID")
 	private BankAccount bankAccount;
 
-	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="USER_ROLE_ID")
 	private UserRole userRole;
 
 	public User() {
