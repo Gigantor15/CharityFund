@@ -23,13 +23,13 @@ public class Donation {
     
     @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
     @JoinColumn(name="DONATION_RECEIVER_ID") 
-    private User receiverId;
+    private Event receiverId;
     
     @Column(name="DONATION_TRANSACTION_DATE", nullable=false, unique=true, updatable=false)
     private Timestamp transactionDate;
     
     @Column(name="DONATION_AMOUNT", nullable=false, unique=true, updatable=false)
-    private float donationAmount;
+    private double donationAmount;
 
     @Override
     public String toString() {
@@ -53,11 +53,11 @@ public class Donation {
         this.donatorId = donatorId;
     }
 
-    public User getReceiverId() {
+    public Event getReceiverId() {
         return receiverId;
     }
 
-    public void setReceiverId(User receiverId) {
+    public void setReceiverId(Event receiverId) {
         this.receiverId = receiverId;
     }
 
@@ -69,17 +69,17 @@ public class Donation {
         this.transactionDate = transactionDate;
     }
 
-    public float getDonationAmount() {
+    public double getDonationAmount() {
         return donationAmount;
     }
 
-    public void setDonationAmount(float donationAmount) {
+    public void setDonationAmount(double donationAmount) {
         this.donationAmount = donationAmount;
     }
 
-    public Donation(int doantionId, User donatorId, User receiverId, Timestamp transactionDate, float donationAmount) {
+    public Donation(int donationId, User donatorId, Event receiverId, Timestamp transactionDate, double donationAmount) {
         super();
-        this.doantionId = doantionId;
+        this.doantionId = donationId;
         this.donatorId = donatorId;
         this.receiverId = receiverId;
         this.transactionDate = transactionDate;
@@ -88,6 +88,5 @@ public class Donation {
 
     public Donation() {
         super();
-        // TODO Auto-generated constructor stub
     }
 }

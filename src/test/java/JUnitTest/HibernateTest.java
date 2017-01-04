@@ -11,10 +11,12 @@ import org.junit.Test;
 
 import DataTier.UserRoleDAO;
 import DataTier.BankAccountDAO;
+import DataTier.EventDAO;
 import DataTier.OrganizationDAO;
 import DataTier.OrganizationTypeDAO;
 import DataTier.UserDAO;
 import beans.BankAccount;
+import beans.Donation;
 import beans.Event;
 import beans.Organization;
 import beans.OrganizationType;
@@ -26,6 +28,27 @@ public class HibernateTest {
 	
 	
 	@Test
+	public void testDonationInsert() {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+	
+		UserDAO userDAO = new UserDAO();
+		EventDAO  eventDAO = new EventDAO();
+		
+		User user = userDAO.get(1);
+		Event event = eventDAO.get(1) ; 
+		Timestamp transactDate = new Timestamp( System.currentTimeMillis() );
+		
+		Donation donation = new Donation(1, user, event, transactDate, 200.10);
+		
+		session.save(donation);
+
+		tx.commit();
+		session.close();
+	}
+	
+	@Test
+	@Ignore
 	public void testEventInsert() {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
