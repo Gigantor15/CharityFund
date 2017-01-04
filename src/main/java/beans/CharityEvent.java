@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 
@@ -11,18 +14,26 @@ import javax.persistence.Table;
 @Table(name = "CHARITY_EVENT")
 public class CharityEvent {
 
+	@Id
 	@Column(name="EVENT_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int eventId;
-	@Column(name="EVENT_NAME")
+	
+	@Column(name="EVENT_NAME", nullable=false, unique=true, updatable=false)
 	private String eventName;
-	@Column(name="EVENT_DESCRIPTION")
+	
+	@Column(name="EVENT_DESCRIPTION", nullable=false, unique=true, updatable=false)
 	private String description;
-	@Column(name="EVENT_START_DATE")
+	
+	@Column(name="EVENT_START_DATE", nullable=false, unique=true, updatable=false)
 	private Date startDate;
-	@Column(name="EVENT_END_DATE")
+	
+	@Column(name="EVENT_END_DATE", nullable=false, unique=true, updatable=false)
 	private Date endDate;
-	@Column(name="EVENT_GOAL_AMOUNT")
+	
+	@Column(name="EVENT_GOAL_AMOUNT", nullable=false, unique=true, updatable=false)
 	private int goalAmt;
+	
 	@Column(name="EVENT_ORGANIZATION_ID")
 	private int orgId;
 	
