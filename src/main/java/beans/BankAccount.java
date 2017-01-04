@@ -20,6 +20,7 @@ public class BankAccount {
 	
 	@Column(name="BANK_ACCOUNT_BALANCE", nullable=false, updatable=true)
 	private double balance;
+	
 	@Override
 	public String toString() {
 		return "BankAccount [bankId=" + bankId + ", accountNum=" + accountNum + ", routingNum=" + routingNum

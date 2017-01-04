@@ -29,7 +29,7 @@ public class User {
 	@JoinColumn(name="USER_BANK_ID")
 	private BankAccount bankAccount;
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_ROLE_ID")
 	private UserRole userRole;
 
