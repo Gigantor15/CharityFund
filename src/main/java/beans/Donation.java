@@ -6,17 +6,7 @@
 package beans;
 
 import java.sql.Timestamp;
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Cacheable
 @Entity
@@ -25,17 +15,14 @@ public class Donation {
 
     @Id
     @Column(name="DONATION_ID")
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private int doantionId;
      
     @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
-    @JoinColumn(nullable=false) 
-    @Column(name="DONATION_DONATOR_ID", nullable=false, unique=true, updatable=false)
+    @JoinColumn(name="DONATION_DONATOR_ID") 
     private User donatorId;
     
     @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
-    @JoinColumn(nullable=false) 
-    @Column(name="DONATION_RECEIVER_ID", nullable=false, unique=true, updatable=false)
+    @JoinColumn(name="DONATION_RECEIVER_ID") 
     private User receiverId;
     
     @Column(name="DONATION_TRANSACTION_DATE", nullable=false, unique=true, updatable=false)

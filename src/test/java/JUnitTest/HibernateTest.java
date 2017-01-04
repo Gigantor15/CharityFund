@@ -1,5 +1,7 @@
 package JUnitTest;
 
+import java.sql.Timestamp;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,9 +11,12 @@ import org.junit.Test;
 
 import DataTier.UserRoleDAO;
 import DataTier.BankAccountDAO;
+import DataTier.OrganizationDAO;
 import DataTier.OrganizationTypeDAO;
 import DataTier.UserDAO;
 import beans.BankAccount;
+import beans.Event;
+import beans.Organization;
 import beans.OrganizationType;
 import beans.User;
 import beans.UserRole;
@@ -19,6 +24,25 @@ import beans.UserRole;
 public class HibernateTest {
 	private SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	
+	
+	@Test
+	public void testEventInsert() {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		
+		OrganizationDAO orgDAO = new OrganizationDAO();
+		Organization org =  orgDAO.get(1);
+		
+		Timestamp startDate = new Timestamp( System.currentTimeMillis() );
+		Timestamp endDate = Timestamp.valueOf("2017-01-10 10:10:10.0");
+		
+		Event event = new Event(1, "Save the Shelter Dogs", "saving the shelter dogs", startDate, endDate, 1000.00, org);
+		
+		session.save(event);
+
+		tx.commit();
+		session.close();
+	}
 	
 	@Test
 	@Ignore
@@ -30,7 +54,7 @@ public class HibernateTest {
 		BankAccountDAO daoBank = new BankAccountDAO();
 		UserDAO daoUser = new UserDAO();
 
-		OrganizationType type = daoOT.get(1001);
+		OrganizationType type = daoOT.get(1);
 		BankAccount account = daoBank.get(1);
 		User user = daoUser.get(1);
 	
@@ -38,9 +62,9 @@ public class HibernateTest {
 		System.out.println(account);
 		System.out.println(user);
 		
-		//Organization org1 = new Organization(1, "PETA", user, account, type);
+		Organization org1 = new Organization(1, "PETA", user, account, type);
 		
-		//session.save(org1);
+		session.save(org1);
 
 		tx.commit();
 		session.close();
@@ -48,6 +72,7 @@ public class HibernateTest {
 	
 
 	@Test
+	@Ignore
 	public void testGetUser() {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();

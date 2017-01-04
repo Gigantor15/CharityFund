@@ -1,17 +1,8 @@
 package beans;
 
 import java.sql.Timestamp;
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Cacheable
 @Entity
@@ -20,7 +11,6 @@ public class Event {
 
     @Id
     @Column(name="EVENT_ID")
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private int eventId;
     
     @Column(name="EVENT_NAME", nullable=false, unique=true, updatable=false)
@@ -36,20 +26,18 @@ public class Event {
     private Timestamp endDate;
     
     @Column(name="EVENT_GOAL_AMOUNT", nullable=false, unique=true, updatable=false)
-    private float goalAmount;
+    private double goalAmount;
     
-    @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER) 	
-    @JoinColumn(nullable=false) 
-    @Column(name="EVENT_ORGANIZATION_ID", nullable=false, updatable=false)
+    @ManyToOne(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER) 	
+    @JoinColumn(name="EVENT_ORGANIZATION_ID") 
     private Organization organizationId;
 
     public Event() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public Event(int eventId, String eventName, String description, Timestamp startDate, Timestamp endDate,
-            float goalAmount, Organization organizationId) {
+    		double goalAmount, Organization organizationId) {
         super();
         this.eventId = eventId;
         this.eventName = eventName;
@@ -107,11 +95,11 @@ public class Event {
         this.endDate = endDate;
     }
 
-    public float getGoalAmount() {
+    public double getGoalAmount() {
         return goalAmount;
     }
 
-    public void setGoalAmount(float goalAmount) {
+    public void setGoalAmount(double goalAmount) {
         this.goalAmount = goalAmount;
     }
 

@@ -23,5 +23,8 @@
 		<mapping class="beans.UserRole"></mapping>
 		<mapping class="beans.User"></mapping>
 		<mapping class="beans.Organization"></mapping>
+		<mapping class="beans.Donation"></mapping>
+		<mapping class="beans.Event"></mapping>
+		
 	</session-factory>
 </hibernate-configuration>

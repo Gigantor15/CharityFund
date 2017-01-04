@@ -10,22 +10,21 @@ public class Organization {
 
 	@Id
 	@Column(name = "ORGANIZATION_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int organizationId;
 
 	@Column(name = "ORGANIZATION_NAME", nullable = false, unique = true, updatable = false)
 	private String organizationName;
 
 	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false)
+	@JoinColumn(name="ORGANIZATION_MANAGER_ID")
 	private User managerId;
 
 	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false)
+	@JoinColumn(name="ORGANIZATION_BANK_ID")
 	private BankAccount bankId;
 
 	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-	@JoinColumn(nullable = false)
+	@JoinColumn(name="ORGANIZATION_TYPE_ID")
 	private OrganizationType organizationTypeId;
 
 	public Organization() {
