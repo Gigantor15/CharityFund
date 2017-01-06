@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import beans.Donation;
+import java.util.List;
+import org.hibernate.criterion.Restrictions;
 
 public class DonationDAO {
 	private SessionFactory sessionFactory;
@@ -23,5 +25,10 @@ public class DonationDAO {
 	public Donation load(int id) {
 		return (Donation) sessionFactory.openSession().load(Donation.class, id);
 	}
+        
+         @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+        public List<Donation> getMadeBy(int usersId){
+            return sessionFactory.openSession().createCriteria(Donation.class).add(Restrictions.eq("id",usersId)).list();
+        }
 
 }
