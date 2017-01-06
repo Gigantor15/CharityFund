@@ -13,12 +13,12 @@ public class EventDAO {
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Event get(int id) {
-		return (Event) sessionFactory.openSession().get(Event.class, id);
+		return (Event) sessionFactory.getCurrentSession().get(Event.class, id);
 	}
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Event load(int id) {
-		return (Event) sessionFactory.openSession().load(Event.class, id);
+		return (Event) sessionFactory.getCurrentSession().load(Event.class, id);
 	}
 
 }
