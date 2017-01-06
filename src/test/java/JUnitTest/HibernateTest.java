@@ -1,6 +1,8 @@
 package JUnitTest;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,6 +22,7 @@ import beans.OrganizationType;
 import beans.User;
 import beans.UserRole;
 import dataTier.BankAccountDAO;
+import dataTier.DataFacade;
 import dataTier.DonationDAO;
 import dataTier.EventDAO;
 import dataTier.OrganizationDAO;
@@ -36,40 +39,24 @@ public class HibernateTest {
 	public static void setup() {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
+	
+	@Test
+	public void createEvent(){
+		
+		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
+		
+		Timestamp startDate = new Timestamp(System.currentTimeMillis());
+		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
+		Event event = new Event(3,"Cancer", "support cancer", startDate, endDate, 10000, org);
+		//contxt.getBean(EventDAO.class).insert(new Event(2,"Cancer 5K event", "Sponser a runner in the 5K race to support cancer", startDate, endDate, 20000, org));
+		contxt.getBean(DataFacade.class).getContext();
+		contxt.getBean(DataFacade.class).createEvent(event);
+		System.out.println("Event was created!");
+	}
 
 	@Test
+	@Ignore
 	public void testGetFromEveryTable() {
-		/*
-		Session session = sf.openSession();
-		Transaction tx = session.beginTransaction();
-
-		BankAccountDAO dao1 = new BankAccountDAO();
-		DonationDAO dao3 = new DonationDAO();
-		EventDAO dao4 = new EventDAO();
-		OrganizationDAO dao5 = new OrganizationDAO();
-		OrganizationTypeDAO dao6 = new OrganizationTypeDAO();
-		UserDAO dao7 = new UserDAO();
-		UserRoleDAO dao2 = new UserRoleDAO();
-
-		BankAccount bean1 = dao1.get(1);
-		Donation bean3 = dao3.get(1);
-		Event bean4 = dao4.get(1);
-		Organization bean5 = dao5.get(1);
-		OrganizationType bean6 = dao6.get(1);
-		User bean7 = dao7.get(1);
-		UserRole bean2 = dao2.get(1);
-
-		System.out.println(bean1);
-		System.out.println(bean3);
-		System.out.println(bean4);
-		System.out.println(bean5);
-		System.out.println(bean6);
-		System.out.println(bean7);
-		System.out.println(bean2);
-
-		tx.commit();
-		session.close();
-		*/
 
 		BankAccount bean1 = contxt.getBean(BankAccountDAO.class).get(1);
 		OrganizationType bean6 = contxt.getBean(OrganizationTypeDAO.class).get(1);
