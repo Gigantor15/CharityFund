@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import beans.Organization;
+import java.util.List;
 
 public class OrganizationDAO {
 	private SessionFactory sessionFactory;
@@ -20,5 +21,10 @@ public class OrganizationDAO {
 	public Organization load(int id) {
 		return (Organization) sessionFactory.openSession().load(Organization.class, id);
 	}
+        
+        @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+        public List<Organization> getAll(){
+            return sessionFactory.openSession().createCriteria(Organization.class).list();
+        }
 
 }
