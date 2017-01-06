@@ -15,7 +15,7 @@ public class Donation {
 
     @Id
     @Column(name="DONATION_ID")
-    private int doantionId;
+    private int donationId;
      
     @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
     @JoinColumn(name="DONATION_DONATOR_ID") 
@@ -33,16 +33,16 @@ public class Donation {
 
     @Override
     public String toString() {
-        return "Donation [doantionId=" + doantionId + ", donatorId=" + donatorId + ", receiverId=" + receiverId
+        return "Donation [doantionId=" + donationId + ", donatorId=" + donatorId + ", receiverId=" + receiverId
                 + ", donationAmount=" + donationAmount + "]";
     }
 
     public int getDoantionId() {
-        return doantionId;
+        return donationId;
     }
 
     public void setDoantionId(int doantionId) {
-        this.doantionId = doantionId;
+        this.donationId = doantionId;
     }
 
     public User getDonatorId() {
@@ -79,7 +79,7 @@ public class Donation {
 
     public Donation(int donationId, User donatorId, Event receiverId, Timestamp transactionDate, double donationAmount) {
         super();
-        this.doantionId = donationId;
+        this.donationId = donationId;
         this.donatorId = donatorId;
         this.receiverId = receiverId;
         this.transactionDate = transactionDate;

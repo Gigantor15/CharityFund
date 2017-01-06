@@ -25,6 +25,5 @@
 		<mapping class="beans.Organization"></mapping>
 		<mapping class="beans.Donation"></mapping>
 		<mapping class="beans.Event"></mapping>
-		
 	</session-factory>
 </hibernate-configuration>

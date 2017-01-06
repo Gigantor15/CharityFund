@@ -6,16 +6,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import DataTier.UserRoleDAO;
-import DataTier.BankAccountDAO;
-import DataTier.DonationDAO;
-import DataTier.EventDAO;
-import DataTier.OrganizationDAO;
-import DataTier.OrganizationTypeDAO;
-import DataTier.UserDAO;
 import beans.BankAccount;
 import beans.Donation;
 import beans.Event;
@@ -23,12 +19,27 @@ import beans.Organization;
 import beans.OrganizationType;
 import beans.User;
 import beans.UserRole;
+import dataTier.BankAccountDAO;
+import dataTier.DonationDAO;
+import dataTier.EventDAO;
+import dataTier.OrganizationDAO;
+import dataTier.OrganizationTypeDAO;
+import dataTier.UserDAO;
+import dataTier.UserRoleDAO;
 
 public class HibernateTest {
+
 	private SessionFactory sf = new Configuration().configure().buildSessionFactory();
+	private static ApplicationContext contxt;
+
+	@BeforeClass
+	public static void setup() {
+		contxt = new ClassPathXmlApplicationContext("beans.xml");
+	}
 
 	@Test
 	public void testGetFromEveryTable() {
+		/*
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
 
@@ -58,6 +69,23 @@ public class HibernateTest {
 
 		tx.commit();
 		session.close();
+		*/
+
+		BankAccount bean1 = contxt.getBean(BankAccountDAO.class).get(1);
+		OrganizationType bean6 = contxt.getBean(OrganizationTypeDAO.class).get(1);
+		UserRole bean2 = contxt.getBean(UserRoleDAO.class).get(1);
+		Donation bean3 = contxt.getBean(DonationDAO.class).get(1);
+		Event bean4 = contxt.getBean(EventDAO.class).get(1);
+		Organization bean5 = contxt.getBean(OrganizationDAO.class).get(1);
+		User bean7 = contxt.getBean(UserDAO.class).get(1);
+
+		System.out.println(bean1);
+		System.out.println(bean6);
+		System.out.println(bean2);
+		System.out.println(bean3);
+		System.out.println(bean4);
+		System.out.println(bean5);
+		System.out.println(bean7);
 	}
 
 	@Test
@@ -143,12 +171,6 @@ public class HibernateTest {
 		session.close();
 	}
 
-	/*
-	 * UserInsert() is not working 8585 [main] WARN
-	 * org.hibernate.util.JDBCExceptionReporter - SQL Error: 904, SQLState:
-	 * 42000 8585 [main] ERROR org.hibernate.util.JDBCExceptionReporter -
-	 * ORA-00904: "USERROLE_USER_ROLE_ID": invalid identifier
-	 */
 	@Test
 	@Ignore
 	public void testUserInsert() {
@@ -159,9 +181,7 @@ public class HibernateTest {
 		BankAccountDAO daoBank = new BankAccountDAO();
 
 		UserRole role = daoRole.load(1);
-		daoRole.closeSessionFactory();
 		BankAccount bankAccount = daoBank.load(1);
-		daoBank.closeSessionFactory();
 
 		System.out.println(bankAccount);
 		System.out.println(role);
