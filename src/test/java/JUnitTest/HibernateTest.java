@@ -1,7 +1,6 @@
 package JUnitTest;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -41,6 +40,7 @@ public class HibernateTest {
 	}
 	
 	@Test
+        @Ignore
 	public void createEvent(){
 		
 		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
@@ -54,6 +54,22 @@ public class HibernateTest {
 		System.out.println("Event was created!");
 	}
 
+       @Test
+       @Ignore
+       public void showAllOrganizations(){    
+           DataFacade.getContext();
+           List allOrgs = contxt.getBean(DataFacade.class).getAllOrganizations();
+           System.out.print("Organization List: " + allOrgs);       
+       }
+       
+       @Test
+  //     @Ignore
+       public void showAllEvents(){
+           DataFacade.getContext();
+           List allEvents = contxt.getBean(DataFacade.class).getAllEvents();
+           System.out.println("Event List: " + allEvents);
+       }
+        
 	@Test
 	@Ignore
 	public void testGetFromEveryTable() {

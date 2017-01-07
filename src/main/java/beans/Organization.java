@@ -44,7 +44,7 @@ public class Organization {
 	@Override
 	public String toString() {
 		return "Organization [organizationId=" + organizationId + ", organizationName=" + organizationName
-				+ ", organizationTypeId=" + organizationTypeId + "]";
+				+ ", managerId=" + managerId + ", BankAccount="+ bankId + ", organizationTypeId=" + organizationTypeId + "]";
 	}
 
 	public int getOrganizationId() {

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import beans.Event;
+import java.util.List;
 
 public class EventDAO {
 	private SessionFactory sessionFactory;
@@ -28,4 +29,10 @@ public class EventDAO {
 	public void insert(Object obj) {
 		sessionFactory.getCurrentSession().save(obj);
 	}
+        
+        @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+        public List<Event> getAll(){
+            List eventList = sessionFactory.getCurrentSession().createCriteria(Event.class).list();
+            return eventList;
+        }
 }

@@ -53,6 +53,8 @@
 	<!-- Facade bean -->
 	<bean name="facade" class="dataTier.DataFacade">
 		<property name="bankAccountDAO" ref="bankAccountDAO" />
+                <property name="eventDAO" ref="eventDAO" />
+                <property name="organizationDAO" ref="organizationDAO" />   
 	</bean>
 	
 	
