@@ -28,6 +28,7 @@ public class HibernateTest {
 	}
 	
 	@Test
+	@Ignore
 	public void createEvent(){
 		
 		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
@@ -41,7 +42,6 @@ public class HibernateTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetFromEveryTable() {
 
 		BankAccount bean1 = contxt.getBean(BankAccountDAO.class).get(1);

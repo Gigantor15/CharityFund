@@ -5,12 +5,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-<<<<<<< HEAD:src/main/java/com/oreo/charity/dataTier/DonationDAO.java
+import com.oreo.charity.beans.Donation;
 import com.oreo.charity.beans.Donation;
 
-=======
-import beans.Donation;
->>>>>>> f5286f380b66d98efc5740357213cfae4f39eef4:src/main/java/dataTier/DonationDAO.java
 import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
@@ -30,15 +27,11 @@ public class DonationDAO {
 	public Donation load(int id) {
 		return (Donation) sessionFactory.openSession().load(Donation.class, id);
 	}
-        
-         @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-        public List<Donation> getMadeBy(int usersId){
-            return sessionFactory.openSession().createCriteria(Donation.class).add(Restrictions.eq("id",usersId)).list();
-        }
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public List<Donation> getMadeBy(int usersId) {
 		return sessionFactory.openSession().createCriteria(Donation.class).add(Restrictions.eq("id", usersId)).list();
 	}
+
 
 }
