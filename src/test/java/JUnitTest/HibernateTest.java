@@ -55,7 +55,7 @@ public class HibernateTest {
 	}
 
        @Test
-       @Ignore
+  //     @Ignore
        public void showAllOrganizations(){    
            DataFacade.getContext();
            List allOrgs = contxt.getBean(DataFacade.class).getAllOrganizations();
@@ -63,7 +63,7 @@ public class HibernateTest {
        }
        
        @Test
-  //     @Ignore
+       @Ignore
        public void showAllEvents(){
            DataFacade.getContext();
            List allEvents = contxt.getBean(DataFacade.class).getAllEvents();
