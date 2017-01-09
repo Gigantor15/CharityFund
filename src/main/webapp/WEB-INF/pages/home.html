@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Hello Spring</h1>
+	Find:
+	<input id="val" type="number" />
+	<button id="go">GO!</button>
+	<br />
+
+	<div id="output"></div>
+
+	<hr />
+
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	$("#go").click(function() {
+		$("#output").html("<strong>test</strong>");
+		var q = $("#val").val();
+		$.ajax({
+			type : "GET",
+			url : "localhost:9001/charityFund/user/" + q,
+			success : function(resp) {
+				if (resp) {
+					renderTrainee(resp);
+				} else {
+					renderError(resp);
+				}
+			}
+		});
+	});
+
+	function renderTrainee(resp) {
+		$("#output").html(
+				"<strong>" + resp.id + "</strong> name:" + resp.firstName);
+	}
+	function renderError(resp) {
+		$("#output").html("<strong>Does not exist</strong>");
+	}
+</script>
+</html>

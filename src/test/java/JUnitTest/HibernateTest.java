@@ -14,21 +14,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import beans.BankAccount;
-import beans.Donation;
-import beans.Event;
-import beans.Organization;
-import beans.OrganizationType;
-import beans.User;
-import beans.UserRole;
-import dataTier.BankAccountDAO;
-import dataTier.DataFacade;
-import dataTier.DonationDAO;
-import dataTier.EventDAO;
-import dataTier.OrganizationDAO;
-import dataTier.OrganizationTypeDAO;
-import dataTier.UserDAO;
-import dataTier.UserRoleDAO;
+import com.oreo.charity.dataTier.*;
+import com.oreo.charity.beans.*;
 
 public class HibernateTest {
 
@@ -49,7 +36,6 @@ public class HibernateTest {
 		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
 		Event event = new Event(3,"Cancer", "support cancer", startDate, endDate, 10000, org);
 		//contxt.getBean(EventDAO.class).insert(new Event(2,"Cancer 5K event", "Sponser a runner in the 5K race to support cancer", startDate, endDate, 20000, org));
-		contxt.getBean(DataFacade.class).getContext();
 		contxt.getBean(DataFacade.class).createEvent(event);
 		System.out.println("Event was created!");
 	}

@@ -2,11 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
+
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.oreo.charity" />
+	<context:annotation-config />
+	
 	<!-- Use @Transactional instead of <tx:advice> -->
 	<tx:annotation-driven />
 
@@ -15,7 +22,8 @@
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
 		<property name="username" value="demo" />
 		<property name="password" value="welcome1" />
-		<property name="url"      value="jdbc:oracle:thin:@orcl.csyh92ll2is8.us-west-2.rds.amazonaws.com:1521:orcl" />
+		<property name="url"
+			value="jdbc:oracle:thin:@orcl.csyh92ll2is8.us-west-2.rds.amazonaws.com:1521:orcl" />
 	</bean>
 
 
@@ -23,7 +31,7 @@
 	<bean name="sf"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="ds" />
-		<property name="packagesToScan" value="beans" />
+		<property name="packagesToScan" value="com.oreo.charity.beans" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.connection.pool_size">20</prop>
@@ -35,25 +43,42 @@
 
 
 	<!-- Transaction Manager -->
-	<bean name="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<bean name="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
 
 
 	<!-- DAO beans -->
-	<bean name="bankAccountDAO"      class="dataTier.BankAccountDAO">      <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="donationDAO"         class="dataTier.DonationDAO">         <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="eventDAO"            class="dataTier.EventDAO">            <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="organizationDAO"     class="dataTier.OrganizationDAO">     <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="organizationTypeDAO" class="dataTier.OrganizationTypeDAO"> <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="userDAO"             class="dataTier.UserDAO">             <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="userRoleDAO"         class="dataTier.UserRoleDAO">         <property name="sessionFactory" ref="sf" /> </bean>
-	
+	<bean name="bankAccountDAO" class="com.oreo.charity.dataTier.BankAccountDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+	<bean name="donationDAO" class="com.oreo.charity.dataTier.DonationDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+	<bean name="eventDAO" class="com.oreo.charity.dataTier.EventDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+	<bean name="organizationDAO" class="com.oreo.charity.dataTier.OrganizationDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+	<bean name="organizationTypeDAO" class="com.oreo.charity.dataTier.OrganizationTypeDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+	<bean name="userDAO" class="com.oreo.charity.dataTier.UserDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+	<bean name="userRoleDAO" class="com.oreo.charity.dataTier.UserRoleDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
 	
 	<!-- Facade bean -->
-	<bean name="facade" class="dataTier.DataFacade">
+	<bean name="facade" class="com.oreo.charity.dataTier.DataFacade">
 		<property name="bankAccountDAO" ref="bankAccountDAO" />
 	</bean>
 	
 	
+
+
+
 </beans>

@@ -1,27 +1,24 @@
-package dataTier;
+package com.oreo.charity.dataTier;
 
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import beans.User;
+import com.oreo.charity.beans.Organization;
 
-public class UserDAO {
+public class OrganizationDAO {
 	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
+	public void setSessionFactory(SessionFactory sessionFactory) {this.sessionFactory = sessionFactory;}
+	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public User get(int id) {
-		return (User) sessionFactory.openSession().get(User.class, id);
+	public Organization get(int id) {
+		return (Organization) sessionFactory.openSession().get(Organization.class, id);
 	}
-
+	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public User load(int id) {
-		return (User) sessionFactory.openSession().load(User.class, id);
+	public Organization load(int id) {
+		return (Organization) sessionFactory.openSession().load(Organization.class, id);
 	}
 
 }

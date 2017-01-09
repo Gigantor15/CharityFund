@@ -1,4 +1,4 @@
-package beans;
+package com.oreo.charity.beans;
 
 import java.sql.Timestamp;
 import javax.persistence.*;
@@ -28,7 +28,7 @@ public class Event {
     @Column(name="EVENT_GOAL_AMOUNT", nullable=false, unique=true, updatable=false)
     private double goalAmount;
     
-    @ManyToOne(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER) 	
+    @ManyToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
     @JoinColumn(name="EVENT_ORGANIZATION_ID") 
     private Organization organizationId;
 

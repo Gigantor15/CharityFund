@@ -1,13 +1,13 @@
-package dataTier;
+package com.oreo.charity.dataTier;
 
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import beans.Event;
+import com.oreo.charity.beans.User;
 
-public class EventDAO {
+public class UserDAO {
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -15,17 +15,13 @@ public class EventDAO {
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Event get(int id) {
-		return (Event) sessionFactory.getCurrentSession().get(Event.class, id);
+	public User get(int id) {
+		return (User) sessionFactory.openSession().get(User.class, id);
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public Event load(int id) {
-		return (Event) sessionFactory.getCurrentSession().load(Event.class, id);
+	public User load(int id) {
+		return (User) sessionFactory.openSession().load(User.class, id);
 	}
 
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public void insert(Object obj) {
-		sessionFactory.getCurrentSession().save(obj);
-	}
 }

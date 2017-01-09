@@ -1,4 +1,4 @@
-package beans;
+package com.oreo.charity.beans;
 
 import javax.persistence.*;
 
