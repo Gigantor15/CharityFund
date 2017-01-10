@@ -4,17 +4,11 @@ package com.oreo.charity.webTier;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.oreo.charity.beans.User;
-import com.oreo.charity.dataTier.UserDAO;
 import com.oreo.charity.middleTier.Delegate;
 
 @Controller
@@ -28,17 +22,15 @@ public class CharityController {
 		this.delegate = delegate;
 	}
 	
-	@ResponseBody
 	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
 	public String getHome(HttpSession session) {
 		return "index";
 	}
 	
-	@ResponseBody
 	@RequestMapping(value = { "/home" }, method = { RequestMethod.GET })
 	public String test(HttpSession session) {
-		System.out.println("in Controller");
-		delegate.test();	
+		/*System.out.println("in Controller");
+		delegate.test();	*/
 		return "charityHome";
 	}
 	
@@ -48,5 +40,12 @@ public class CharityController {
 		return delegate.testGet().toString();
 	}
 	
+/*	@RequestMapping(value= "/home/insert", method = RequestMethod.POST, consumes = "application/json" )
+	public ResponseEntity createEvent(@RequestBody Event event, BindingResult result){
+		if(result.hasErrors())
+			return new ResponseEntity("Failed", HttpStatus.BAD_REQUEST);
+		delegate.createNewEvent(event);
+		return new ResponseEntity(HttpStatus.CREATED);
+	}*/
 
 }

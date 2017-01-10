@@ -21,6 +21,10 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -97,27 +101,80 @@
 				</tbody>
 			</table>
 		</form>
+
+		<div id="charityTest"></div>
+
+
 	</div>
 
-	<button type="button" class="btn btn-primary btn-lg btn-block"
-		data-toggle="modal" data-target="#newEvent">Create New Event</button>
-	<div id="newEvent" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="event-content">
-				<div class="event-header">
-					<h4 class="event-title">Create a New Event</h4>
-				</div>
-				<div class="event-body">
-					<p>Enter the details for your event below</p>
-				</div>
-				<div class="event-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	<div class="eventContainer">
+		<button type="button" class="btn btn-primary btn-lg btn-block"
+			data-toggle="modal" data-target="#newEvent">Create New Event</button>
+		<div id="newEvent" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="event-content">
+					<div class="event-header">
+						<h4 class="event-title">Create a New Event</h4>
+					</div>
+					<div class="event-body">
+						<p>Enter the details for your event below</p>
+						<table>
+							<tr>
+								<td>Event Name</td>
+								<td><input id="eventname" type="text" /></td>
+							</tr>
+							<tr>
+								<td>Description</td>
+								<td><input id="description" type="text" /></td>
+							</tr>
+							<tr>
+								<td>Goal</td>
+								<td><input id="goal" type="number" /></td>
+							</tr>
+							<tr>
+								<td>End Date</td>
+								<td><input id="enddate" type="date" /></td>
+							</tr>
+						</table>
+						<button id="submit">Submit Event</button>
+					</div>
+					<div class="event-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
 </body>
-
+<script type="text/javascript">
+	$("#submit").click(function($) {
+		$("#charityTest").html("<strong>test</strong>");
+		data["eventName"] = $("#eventname").val();
+		data["description"]= $("#description").val();
+		data["goal"] = $("#goal").val();
+		data["endDate"] = $("#enddate").val();
+		$.ajax({
+			type : "POST",
+			contentType: "application/json",
+			url : "localhost:9001/CharityFund/home/",
+			data: JSON.stringify(data)
+			dataType: 'json',
+			success : function(data) {
+				if (data) {
+					renderCharity(data);
+				} else {
+					renderError(data);
+				}
+			}
+		});
+	});
+	
+	function renderCharity(resp) {
+		$("#charityTest").html("<strong>" + resp.id + "</strong> name:" + resp.firstName);
+	}
+	function renderError(resp) {
+		$("#charityTest").html("<strong>Does not exist</strong>");
+	}
+</script>
 </html>
