@@ -18,6 +18,6 @@
 		<property name="prefix" value="/pages/" />
 		<property name="suffix" value=".html" />
 	</bean>
-	<mvc:resources mapping="/pages/*" location="/WEB-INF/pages/" />
+	<mvc:resources mapping="/pages/**" location="/WEB-INF/pages/" />
 
 </beans>

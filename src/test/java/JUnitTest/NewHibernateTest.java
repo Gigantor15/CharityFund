@@ -30,17 +30,16 @@ public class NewHibernateTest {
 	public static void setup() {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
-
 	
 	@Test
 	public void testFacade(){
 		System.out.println( contxt.getBean(DataFacade.class).getBankAccount() );
 		System.out.println( contxt.getBean(DataFacade.class).getDonation() );
-		System.out.println( contxt.getBean(DataFacade.class).getEvent() );
-		System.out.println( contxt.getBean(DataFacade.class).getOrganization() );
-		System.out.println( contxt.getBean(DataFacade.class).getOrganizationType() );
-		System.out.println( contxt.getBean(DataFacade.class).getUser() );
-		System.out.println( contxt.getBean(DataFacade.class).getUserRole() );
+		//System.out.println( contxt.getBean(DataFacade.class).getEvent() );
+		//System.out.println( contxt.getBean(DataFacade.class).getOrganization() );
+		//System.out.println( contxt.getBean(DataFacade.class).getOrganizationType() );
+		//System.out.println( contxt.getBean(DataFacade.class).getUser() );
+		//System.out.println( contxt.getBean(DataFacade.class).getUserRole() );
 	}
 	
 	@Test

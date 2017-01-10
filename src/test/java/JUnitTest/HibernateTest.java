@@ -40,6 +40,7 @@ public class HibernateTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetFromEveryTable() {
 		
 		BankAccount bean1 = contxt.getBean(BankAccountDAO.class).get(1);
