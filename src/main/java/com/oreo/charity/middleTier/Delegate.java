@@ -18,4 +18,8 @@ public class Delegate {
 		mainService.test();
 	}
 
+
+	public void createNewEvent(){
+		
+	}
 }
