@@ -10,55 +10,59 @@ import com.oreo.charity.beans.OrganizationType;
 import com.oreo.charity.beans.User;
 import com.oreo.charity.beans.UserRole;
 
-
 @Component(value = "facade")
 public class DataFacade {
-	
-	//Contextual Session
+
+	// Contextual Session
 	BankAccountDAO bankAccountDAO;
+
 	public void setBankAccountDAO(BankAccountDAO bankAccountDAO) {
 		this.bankAccountDAO = bankAccountDAO;
 	}
-	
+
 	DonationDAO donationDAO;
+
 	public void setDonationDAO(DonationDAO donationDAO) {
 		this.donationDAO = donationDAO;
 	}
-	
+
 	EventDAO eventDAO;
+
 	public void setEventDAO(EventDAO eventDAO) {
 		this.eventDAO = eventDAO;
 	}
-	
+
 	OrganizationDAO organizationDAO;
+
 	public void setOrganizationDAO(OrganizationDAO organizationDAO) {
 		this.organizationDAO = organizationDAO;
 	}
-	
+
 	OrganizationTypeDAO organizationTypeDAO;
+
 	public void setOrganizationTypeDAO(OrganizationTypeDAO organizationTypeDAO) {
 		this.organizationTypeDAO = organizationTypeDAO;
 	}
-	
+
 	UserDAO userDAO;
+
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
-	
+
 	UserRoleDAO userRoleDAO;
+
 	public void setUserRoleDAO(UserRoleDAO userRoleDAO) {
 		this.userRoleDAO = userRoleDAO;
 	}
-	
+
 	public DataFacade() {
 		super();
 	}
-	
-	
+
 	public void test() {
 		System.out.println("in DataFacade");
 	}
-
 
 	public void createEvent(Event event) {
 		eventDAO.insert(event);
@@ -68,7 +72,7 @@ public class DataFacade {
 	public BankAccount getBankAccount() {
 		return bankAccountDAO.get(1);
 	}
-	
+
 	public OrganizationType getOrganizationType() {
 		return organizationTypeDAO.get(1);
 	}
@@ -77,7 +81,8 @@ public class DataFacade {
 		return userRoleDAO.get(1);
 	}
 
-	public Donation getDonation() {;
+	public Donation getDonation() {
+		;
 		return donationDAO.get(1);
 	}
 
@@ -97,5 +102,5 @@ public class DataFacade {
 	 * public void createEvent(List<Event> events){ for(Event event : events){
 	 * eventDAO.insert(event); System.out.println("Event was inserted"); } }
 	 */
-	
+
 }

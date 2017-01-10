@@ -27,54 +27,26 @@ public class CharityController {
 	public void setDelegate(Delegate delegate) {
 		this.delegate = delegate;
 	}
-
+	
 	@ResponseBody
-	@RequestMapping(value = { "/home" }, method = { RequestMethod.GET }, produces = { "application/json" })
-	public void test(HttpSession session) {
+	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
+	public String getHome(HttpSession session) {
+		return "index";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/home" }, method = { RequestMethod.GET })
+	public String test(HttpSession session) {
 		System.out.println("in Controller");
 		delegate.test();	
-	}
-
-	// localhost:9001/charityFund/user/18
-	@ResponseBody
-	@RequestMapping(value = "/user/{param}", // PathParam
-			        method = RequestMethod.GET, produces = "application/json")
-	public User getDan(@PathVariable(value = "param") int id) {
-		ApplicationContext contxt = new ClassPathXmlApplicationContext("beans.xml");
-		User user = contxt.getBean(UserDAO.class).get(id);
-		System.out.println(user);
-		return user;
+		return "charityHome";
 	}
 	
-
-	// localhost:9001/charityFund/user?q=__
 	@ResponseBody
-	@RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json")
-	public User getUser(@RequestParam(value = "q") int id) {
-		ApplicationContext contxt = new ClassPathXmlApplicationContext("beans.xml");
-		User user = contxt.getBean(UserDAO.class).get(id);
-		System.out.println(user);
-		return user;
+	@RequestMapping(value = { "/testget" }, method = { RequestMethod.GET })
+	public String testget(HttpSession session) {
+		return delegate.testGet().toString();
 	}
 	
-	/*
-	@ResponseBody
-	@RequestMapping(value = "trainees", method = RequestMethod.GET, produces = "application/json")
-	public List<Trainee> getAll() {
-		return businessDelegate.getAll();
-	}
-
-	@RequestMapping(value = "/trainee/insert", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity insert(@RequestBody @Valid Trainee obj, BindingResult result) { // BResult
-																							// holds
-																							// errors
-		if (result.hasErrors()) {
-			return new ResponseEntity("Failed", HttpStatus.BAD_REQUEST);
-		}
-
-		businessDelegate.insert(obj);
-		return new ResponseEntity(HttpStatus.CREATED);
-	}
-*/
 
 }
