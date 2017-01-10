@@ -1,8 +1,6 @@
 package JUnitTest;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,8 +12,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.oreo.charity.dataTier.*;
 import com.oreo.charity.beans.*;
+import com.oreo.charity.dataTier.*;
 
 public class HibernateTest {
 
@@ -43,22 +41,22 @@ public class HibernateTest {
 
 	@Test
 	public void testGetFromEveryTable() {
-
+		
 		BankAccount bean1 = contxt.getBean(BankAccountDAO.class).get(1);
-		OrganizationType bean6 = contxt.getBean(OrganizationTypeDAO.class).get(1);
-		UserRole bean2 = contxt.getBean(UserRoleDAO.class).get(1);
-		Donation bean3 = contxt.getBean(DonationDAO.class).get(1);
-		Event bean4 = contxt.getBean(EventDAO.class).get(1);
-		Organization bean5 = contxt.getBean(OrganizationDAO.class).get(1);
-		User bean7 = contxt.getBean(UserDAO.class).get(1);
+		//OrganizationType bean6 = contxt.getBean(OrganizationTypeDAO.class).get(1);
+		//UserRole bean2 = contxt.getBean(UserRoleDAO.class).get(1);
+		//Donation bean3 = contxt.getBean(DonationDAO.class).get(1);
+		//Event bean4 = contxt.getBean(EventDAO.class).get(1);
+		//Organization bean5 = contxt.getBean(OrganizationDAO.class).get(1);
+		//User bean7 = contxt.getBean(UserDAO.class).get(1);
 
 		System.out.println(bean1);
-		System.out.println(bean6);
-		System.out.println(bean2);
-		System.out.println(bean3);
-		System.out.println(bean4);
-		System.out.println(bean5);
-		System.out.println(bean7);
+		//System.out.println(bean6);
+		//System.out.println(bean2);
+		//System.out.println(bean3);
+		//System.out.println(bean4);
+		//System.out.println(bean5);
+		//System.out.println(bean7);
 	}
 
 	@Test

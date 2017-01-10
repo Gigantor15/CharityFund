@@ -1,97 +1,101 @@
 package com.oreo.charity.dataTier;
 
-
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.oreo.charity.beans.BankAccount;
+import com.oreo.charity.beans.Donation;
 import com.oreo.charity.beans.Event;
+import com.oreo.charity.beans.Organization;
+import com.oreo.charity.beans.OrganizationType;
+import com.oreo.charity.beans.User;
+import com.oreo.charity.beans.UserRole;
 
 
 @Component(value = "facade")
 public class DataFacade {
-
-	private ApplicationContext ctxt;
-
+	
+	//Contextual Session
+	BankAccountDAO bankAccountDAO;
+	public void setBankAccountDAO(BankAccountDAO bankAccountDAO) {
+		this.bankAccountDAO = bankAccountDAO;
+	}
+	
+	DonationDAO donationDAO;
+	public void setDonationDAO(DonationDAO donationDAO) {
+		this.donationDAO = donationDAO;
+	}
+	
+	EventDAO eventDAO;
+	public void setEventDAO(EventDAO eventDAO) {
+		this.eventDAO = eventDAO;
+	}
+	
+	OrganizationDAO organizationDAO;
+	public void setOrganizationDAO(OrganizationDAO organizationDAO) {
+		this.organizationDAO = organizationDAO;
+	}
+	
+	OrganizationTypeDAO organizationTypeDAO;
+	public void setOrganizationTypeDAO(OrganizationTypeDAO organizationTypeDAO) {
+		this.organizationTypeDAO = organizationTypeDAO;
+	}
+	
+	UserDAO userDAO;
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
+	
+	UserRoleDAO userRoleDAO;
+	public void setUserRoleDAO(UserRoleDAO userRoleDAO) {
+		this.userRoleDAO = userRoleDAO;
+	}
+	
 	public DataFacade() {
 		super();
-	}
-
-
-	public void setApplicationContext(ApplicationContext ctxt) throws BeansException {
-		this.ctxt = ctxt;
 	}
 	
 	
 	public void test() {
 		System.out.println("in DataFacade");
 	}
-	
-	
-	
-	
-	BankAccountDAO bankAccountDAO;
-	public void setBankAccountDAO(BankAccountDAO bankAccountDAO) {
-		this.bankAccountDAO = bankAccountDAO;
-	}
-	
-
-	/*
-	 * public void createEvent(List<Event> events){ for(Event event : events){
-	 * eventDAO.insert(event); System.out.println("Event was inserted"); } }
-	 */
-
 
 
 	public void createEvent(Event event) {
-		EventDAO eventDAO = new EventDAO();
 		eventDAO.insert(event);
 		System.out.println("Event was inserted");
 	}
 
 	public BankAccount getBankAccount() {
-	
-		BankAccountDAO bankAccountDAO = ctxt.getBean("bankAccountDAO", BankAccountDAO.class);
-		
-		// do DAO stuff
-		BankAccount acc = bankAccountDAO.get(1);
-		System.out.println(acc);
-		return acc;
+		return bankAccountDAO.get(1);
 	}
-
-
 	
-
-	/*
 	public OrganizationType getOrganizationType() {
-		OrganizationTypeDAO organizationTypeDAO = new OrganizationTypeDAO();
 		return organizationTypeDAO.get(1);
 	}
 
 	public UserRole getUserRole() {
-		UserRoleDAO userRoleDAO = new UserRoleDAO();
 		return userRoleDAO.get(1);
 	}
 
-	public Donation getDonation() {
-		DonationDAO donationDAO = new DonationDAO();
+	public Donation getDonation() {;
 		return donationDAO.get(1);
 	}
 
 	public Event getEvent() {
-		EventDAO eventDAO = new EventDAO();
 		return eventDAO.get(1);
 	}
 
 	public Organization getOrganization() {
-		OrganizationDAO organizationDAO = new OrganizationDAO();
 		return organizationDAO.get(1);
 	}
 
 	public User getUser() {
-		UserDAO userDAO = new UserDAO();
 		return userDAO.get(1);
 	}
+
+	/*
+	 * public void createEvent(List<Event> events){ for(Event event : events){
+	 * eventDAO.insert(event); System.out.println("Event was inserted"); } }
 	 */
+	
 }

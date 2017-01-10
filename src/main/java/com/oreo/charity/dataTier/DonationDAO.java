@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oreo.charity.beans.Donation;
-import com.oreo.charity.beans.Donation;
 
 import java.util.List;
 import org.hibernate.criterion.Restrictions;

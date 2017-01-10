@@ -10,10 +10,6 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
 
-	<mvc:annotation-driven />
-	<context:component-scan base-package="com.oreo.charity" />
-	<context:annotation-config />
-	
 	<!-- Use @Transactional instead of <tx:advice> -->
 	<tx:annotation-driven />
 
@@ -71,13 +67,21 @@
 	<bean name="userRoleDAO" class="com.oreo.charity.dataTier.UserRoleDAO">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
-	
+
+
 	<!-- Facade bean -->
 	<bean name="facade" class="com.oreo.charity.dataTier.DataFacade">
 		<property name="bankAccountDAO" ref="bankAccountDAO" />
+		<property name="donationDAO" ref="donationDAO" />
+		<property name="eventDAO" ref="eventDAO" />
+		<property name="organizationDAO" ref="organizationDAO" />
+		<property name="organizationTypeDAO" ref="organizationTypeDAO" />
+		<property name="userDAO" ref="userDAO" />
+		<property name="userRoleDAO" ref="userRoleDAO" />
 	</bean>
-	
-	
+
+
+
 
 
 
