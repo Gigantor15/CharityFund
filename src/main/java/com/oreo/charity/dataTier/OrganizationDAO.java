@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oreo.charity.beans.Organization;
+import java.util.List;
 
 public class OrganizationDAO {
 	private SessionFactory sessionFactory;
@@ -13,12 +14,18 @@ public class OrganizationDAO {
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Organization get(int id) {
-		return (Organization) sessionFactory.openSession().get(Organization.class, id);
+		return (Organization) sessionFactory.getCurrentSession().get(Organization.class, id);
 	}
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Organization load(int id) {
-		return (Organization) sessionFactory.openSession().load(Organization.class, id);
+		return (Organization) sessionFactory.getCurrentSession().load(Organization.class, id);
 	}
+        
+          @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+        public List<Organization> getAll(){
+            List orgsList = sessionFactory.openSession().createCriteria(Organization.class).list();
+            return orgsList;
+        }
 
 }

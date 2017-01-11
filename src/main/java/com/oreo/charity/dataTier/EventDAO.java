@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oreo.charity.beans.Event;
+import java.util.List;
 
 public class EventDAO {
 	private SessionFactory sessionFactory;
@@ -16,16 +17,22 @@ public class EventDAO {
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Event get(int id) {
-		return (Event) sessionFactory.openSession().get(Event.class, id);
+		return (Event) sessionFactory.getCurrentSession().get(Event.class, id);
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Event load(int id) {
-		return (Event) sessionFactory.openSession().load(Event.class, id);
+		return (Event) sessionFactory.getCurrentSession().load(Event.class, id);
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void insert(Object obj) {
-		sessionFactory.openSession().save(obj);
+		sessionFactory.getCurrentSession().save(obj);
 	}
+        
+        @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+        public List<Event> getAllEvents(){
+            List eventList = sessionFactory.openSession().createCriteria(Event.class).list();
+            return eventList;
+        }
 }

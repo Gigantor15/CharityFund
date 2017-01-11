@@ -17,12 +17,12 @@ public class UserRoleDAO {
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public UserRole get(int id) {
-		return (UserRole) sessionFactory.openSession().get(UserRole.class, id);
+		return (UserRole) sessionFactory.getCurrentSession().get(UserRole.class, id);
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public UserRole load(int id) {
-		return (UserRole) sessionFactory.openSession().load(UserRole.class, id);
+		return (UserRole) sessionFactory.getCurrentSession().load(UserRole.class, id);
 	}
 
 }

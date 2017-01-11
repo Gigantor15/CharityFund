@@ -148,8 +148,7 @@
 
 </body>
 <script type="text/javascript">
-	$("#submit").click(function($) {
-		$("#charityTest").html("<strong>test</strong>");
+	$("#submit").click(function() {
 		data["eventName"] = $("#eventname").val();
 		data["description"]= $("#description").val();
 		data["goal"] = $("#goal").val();
@@ -161,20 +160,14 @@
 			data: JSON.stringify(data)
 			dataType: 'json',
 			success : function(data) {
-				if (data) {
-					renderCharity(data);
-				} else {
-					renderError(data);
-				}
+				
+			}
+			error: function(data){
+			
 			}
 		});
 	});
 	
-	function renderCharity(data) {
-		$("#charityTest").html("<strong>" + data.eventname + "</strong> goal:" + data.goal);
-	}
-	function renderError(resp) {
-		$("#charityTest").html("<strong>Does not exist</strong>");
-	}
+
 </script>
 </html>
