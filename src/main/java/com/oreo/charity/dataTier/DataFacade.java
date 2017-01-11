@@ -9,6 +9,7 @@ import com.oreo.charity.beans.Organization;
 import com.oreo.charity.beans.OrganizationType;
 import com.oreo.charity.beans.User;
 import com.oreo.charity.beans.UserRole;
+import java.util.List;
 
 @Component(value = "facade")
 public class DataFacade {
@@ -58,6 +59,15 @@ public class DataFacade {
 		System.out.println("in DataFacade");
 	}
 
+        public List<Organization> orgList(){
+            return organizationDAO.getAll();
+        }
+        
+        public List<Event> eventList(){
+            return eventDAO.getAllEvents();
+        }
+        
+        
 	public void createEvent(Event event) {
 		eventDAO.insert(event);
 		System.out.println("Event was inserted");
@@ -65,7 +75,6 @@ public class DataFacade {
 	
 	public void insertBankAccount(BankAccount account) {
 		bankAccountDAO.insert(account);
-	}
 
 	public BankAccount 			getBankAccount() {return bankAccountDAO.get(1); }
 	public OrganizationType 	getOrganizationType() { return organizationTypeDAO.get(1);}
