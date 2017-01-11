@@ -75,7 +75,8 @@ public class DataFacade {
 	
 	public void insertBankAccount(BankAccount account) {
 		bankAccountDAO.insert(account);
-
+	}
+	
 	public BankAccount 			getBankAccount() {return bankAccountDAO.get(1); }
 	public OrganizationType 	getOrganizationType() { return organizationTypeDAO.get(1);}
 	public UserRole 			getUserRole() { return userRoleDAO.get(1); }
