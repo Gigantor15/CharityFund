@@ -13,12 +13,12 @@ public class OrganizationDAO {
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Organization get(int id) {
-		return (Organization) sessionFactory.openSession().get(Organization.class, id);
+		return (Organization) sessionFactory.getCurrentSession().get(Organization.class, id);
 	}
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Organization load(int id) {
-		return (Organization) sessionFactory.openSession().load(Organization.class, id);
+		return (Organization) sessionFactory.getCurrentSession().load(Organization.class, id);
 	}
 
 }

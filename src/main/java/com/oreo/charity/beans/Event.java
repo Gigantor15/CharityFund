@@ -28,7 +28,7 @@ public class Event {
     @Column(name="EVENT_GOAL_AMOUNT", nullable=false, unique=true, updatable=false)
     private double goalAmount;
     
-    @ManyToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
+    @ManyToOne(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER) 	
     @JoinColumn(name="EVENT_ORGANIZATION_ID") 
     private Organization organizationId;
 

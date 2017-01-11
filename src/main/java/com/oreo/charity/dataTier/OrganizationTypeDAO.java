@@ -16,12 +16,12 @@ public class OrganizationTypeDAO {
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public OrganizationType get(int id) {
-		return (OrganizationType) sessionFactory.openSession().get(OrganizationType.class, id);
+		return (OrganizationType) sessionFactory.getCurrentSession().get(OrganizationType.class, id);
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public OrganizationType load(int id) {
-		return (OrganizationType) sessionFactory.openSession().load(OrganizationType.class, id);
+		return (OrganizationType) sessionFactory.getCurrentSession().load(OrganizationType.class, id);
 	}
 
 }

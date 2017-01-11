@@ -15,15 +15,15 @@ public class Organization {
 	@Column(name = "ORGANIZATION_NAME", nullable = false, unique = true, updatable = false)
 	private String organizationName;
 
-	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="ORGANIZATION_MANAGER_ID")
 	private User managerId;
 
-	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="ORGANIZATION_BANK_ID")
 	private BankAccount bankId;
 
-	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="ORGANIZATION_TYPE_ID")
 	private OrganizationType organizationTypeId;
 

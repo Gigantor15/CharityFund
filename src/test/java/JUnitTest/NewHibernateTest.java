@@ -31,15 +31,35 @@ public class NewHibernateTest {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
 	
+	// error opensession vs getcurrent
 	@Test
+	public void testAssignNewBankAccount(){
+		BankAccount userBank= contxt.getBean(BankAccountDAO.class).get(3);
+		System.out.println(userBank);
+		User user =  contxt.getBean(UserDAO.class).get(11);
+		System.out.println(user);
+		user.setBankAccount(userBank);
+		contxt.getBean(UserDAO.class).update(user);
+	}
+	
+	@Test
+	@Ignore
+	public void testBankAccountInsert() {
+		BankAccount account = new BankAccount(3, 123456889, 111111111, 50000.00);
+		contxt.getBean(DataFacade.class).insertBankAccount(account);
+		System.out.println("success");
+	}
+	
+	@Test
+	@Ignore
 	public void testFacade(){
 		System.out.println( contxt.getBean(DataFacade.class).getBankAccount() );
 		System.out.println( contxt.getBean(DataFacade.class).getDonation() );
-		//System.out.println( contxt.getBean(DataFacade.class).getEvent() );
-		//System.out.println( contxt.getBean(DataFacade.class).getOrganization() );
-		//System.out.println( contxt.getBean(DataFacade.class).getOrganizationType() );
-		//System.out.println( contxt.getBean(DataFacade.class).getUser() );
-		//System.out.println( contxt.getBean(DataFacade.class).getUserRole() );
+		System.out.println( contxt.getBean(DataFacade.class).getEvent() );
+		System.out.println( contxt.getBean(DataFacade.class).getOrganization() );
+		System.out.println( contxt.getBean(DataFacade.class).getOrganizationType() );
+		System.out.println( contxt.getBean(DataFacade.class).getUser() );
+		System.out.println( contxt.getBean(DataFacade.class).getUserRole() );
 	}
 	
 	@Test

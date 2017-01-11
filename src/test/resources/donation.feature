@@ -1,44 +1,13 @@
-Feature: Make Donation
-  As a donator
+Feature: Making Donation
+  As a user
   I can choose a charity
   So I can make a donation
+Background: user is logged in and user is on a specific event page
+Scenario: make donation
+	Given user enter the amount of money to donate
+	And user have enough money in my bank to donate
+	When user click donate
+	Then users bank amount will be subtracted by donated amount
+	And events organization bank amount will be added by the donated amount
 
-  Background: 
-    Given I have these bank accounts
-      | bankAccount | name           |
-      |         555 | Dan Pickles    |
-      |         777 | Howard Johnson |
-      |         888 | Randolph Scott |
-
-  Scenario Outline: 
-    Given I have a bank account
-    And I have <balance> dollars
-    When I donate <donation> dollars
-    Then I have <remaining> dollars left
-
-    Examples: 
-      | balance | donation | remaining |
-      |    1000 |      200 |       800 |
-      |    5000 |     1000 |      4000 |
-      |    3000 |     2000 |      1000 |
-
-
-  Scenario Outline: 
-    Given I have a bank account
-    And I have <balance> dollars
-    When I try to donate <donation> dollars
-    Then I have insufficient <remaining> dollars left
-
-    Examples: 
-      | balance | donation | remaining |
-      |       0 |      500 |      -500 |
-
-  Scenario Outline: 
-    Given I have a bank account
-    And I have <balance> dollars
-    When I try to donate <donation> dollars
-    Then I recieve a warning message of having no <remaining> dollars after donation
-
-    Examples: 
-      | balance | donation | remaining |
-      |     600 |      600 |         0 |
+  

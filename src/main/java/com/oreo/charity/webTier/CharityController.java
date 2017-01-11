@@ -1,6 +1,10 @@
 package com.oreo.charity.webTier;
 
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +32,6 @@ public class CharityController {
 		this.delegate = delegate;
 	}
 	
-	@ResponseBody
 	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
 	public String getHome(HttpSession session) {
 		return "index";
@@ -48,5 +51,15 @@ public class CharityController {
 		return delegate.testGet().toString();
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = { "/login" }, method = { RequestMethod.POST })
+	public String login (HttpSession session) {
+		return "test";
+	}
+	
+	
+
 
 }
+
+

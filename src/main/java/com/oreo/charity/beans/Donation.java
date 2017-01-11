@@ -17,11 +17,11 @@ public class Donation {
     @Column(name="DONATION_ID")
     private int donationId;
      
-    @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
+    @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER) 	
     @JoinColumn(name="DONATION_DONATOR_ID") 
     private User donatorId;
     
-    @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY) 	
+    @OneToOne(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER) 	
     @JoinColumn(name="DONATION_RECEIVER_ID") 
     private Event receiverId;
     
