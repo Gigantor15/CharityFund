@@ -16,6 +16,11 @@ public class Delegate {
 	public void setUserService(MainService mainService) {
 		this.mainService = mainService;
 	}
+	
+	@Autowired
+	public void setUserService(CreateEventService createEventService){
+		this.createEventService = createEventService;
+	}
 
 	public void test() {
 		System.out.println("in delegate");

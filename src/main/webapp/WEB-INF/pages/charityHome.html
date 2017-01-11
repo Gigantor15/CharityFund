@@ -157,7 +157,7 @@
 		$.ajax({
 			type : "POST",
 			contentType: "application/json",
-			url : "localhost:9001/CharityFund/home/",
+			url : "localhost:9001/CharityFund/home/insert",
 			data: JSON.stringify(data)
 			dataType: 'json',
 			success : function(data) {
@@ -170,8 +170,8 @@
 		});
 	});
 	
-	function renderCharity(resp) {
-		$("#charityTest").html("<strong>" + resp.id + "</strong> name:" + resp.firstName);
+	function renderCharity(data) {
+		$("#charityTest").html("<strong>" + data.eventname + "</strong> goal:" + data.goal);
 	}
 	function renderError(resp) {
 		$("#charityTest").html("<strong>Does not exist</strong>");
