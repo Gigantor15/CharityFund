@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Event {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="EVENT_ID")
     private int eventId;
     
@@ -36,10 +37,9 @@ public class Event {
         super();
     }
 
-    public Event(int eventId, String eventName, String description, Timestamp startDate, Timestamp endDate,
+    public Event(String eventName, String description, Timestamp startDate, Timestamp endDate,
     		double goalAmount, Organization organizationId) {
         super();
-        this.eventId = eventId;
         this.eventName = eventName;
         this.description = description;
         this.startDate = startDate;

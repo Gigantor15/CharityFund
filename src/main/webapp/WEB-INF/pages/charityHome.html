@@ -71,33 +71,15 @@
 			<!-- submit a form -->
 			<table class="table table-striped">
 				<thead>
-					<h2 style="color: blue">Charity Events</h2>
 					<tr>
-						<th>#</th>
 						<th>Event Name</th>
 						<th>Description</th>
 						<th>Goal</th>
+						<th>End Date</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>$3000</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>$15,000</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>$50,000</td>
-					</tr>
+					
 				</tbody>
 			</table>
 		</form>
@@ -118,25 +100,32 @@
 					</div>
 					<div class="event-body">
 						<p>Enter the details for your event below</p>
-						<table>
+						<div class="new-event">
+							<table>
 							<tr>
 								<td>Event Name</td>
-								<td><input id="eventname" type="text" /></td>
+								<td><input type="text" class="new-event-control" id="eventname" placeholder="Enter Event Name"></td>
 							</tr>
 							<tr>
 								<td>Description</td>
-								<td><input id="description" type="text" /></td>
+								<td><input type="text" class="new-event-control" id="description" placeholder="Enter Description"></td>
 							</tr>
 							<tr>
 								<td>Goal</td>
-								<td><input id="goal" type="number" /></td>
+								<td><input type="number" class="new-event-control" id="goal" placeholder="Enter Goal Amount"></td>
 							</tr>
 							<tr>
 								<td>End Date</td>
-								<td><input id="enddate" type="date" /></td>
+								<td><input type="date" class="new-event-control" id="enddate" placeholder="Enter End Date"></td>
 							</tr>
 						</table>
-						<button id="submit">Submit Event</button>
+							
+							
+							
+							
+						</div>
+						<button class="addEvent" type="submit" class="btn btn-primary">Submit
+							Event</button>
 					</div>
 					<div class="event-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -148,26 +137,41 @@
 
 </body>
 <script type="text/javascript">
-	$("#submit").click(function() {
-		data["eventName"] = $("#eventname").val();
-		data["description"]= $("#description").val();
-		data["goal"] = $("#goal").val();
-		data["endDate"] = $("#enddate").val();
+	$(".addEvent").click(function() {
+		var eventname = $("#eventname").val();
+		var description = $("#description").val();
+		var goal = $("#goal").val();
+		var enddate = $("#enddate").val();
+		var obj = JSON.stringify({
+			"eventname" : eventname,
+			"description" : description,
+			"goal" : goal,
+			"enddate" : enddate
+		});
 		$.ajax({
-			type : "POST",
-			contentType: "application/json",
-			url : "localhost:9001/CharityFund/home/insert",
-			data: JSON.stringify(data)
-			dataType: 'json',
-			success : function(data) {
-				
-			}
-			error: function(data){
-			
+			method : "POST",
+			url : "http://localhost:9001/CharityFund/home/insert",
+			data : obj
+		});
+		getEvent();
+	});
+
+	function getEvent() {
+		$(".table tbody tr").remove();
+		$.ajax({
+			method : "POST",
+			url : "http://localhost:9001/CharityFund/home/getAll",
+			success : function(resp) {
+				var iterable = resp.events;
+				$.each(iterable, function(i, item) {
+					var event = "<tr>" + "<td>" + item.eventname + "</td>"
+							+ "<td>" + item.description + "</td>" + "<td>"
+							+ item.goal + "</td>" + "<td>" + item.enddate
+							+ "</td>" + "</tr>";
+					$(".table tbody").append(event);
+				});
 			}
 		});
-	});
-	
-
+	}
 </script>
 </html>
