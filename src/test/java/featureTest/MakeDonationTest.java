@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.oreo.charity.beans.BankAccount;
 import com.oreo.charity.dataTier.DataFacade;
@@ -88,6 +87,10 @@ public class MakeDonationTest {
 		// Actual comparation of expected and actual data
 		assertEquals(userBalanceExpected, userBalanceActual, precision);
 		assertEquals(organizationBalanceExpected, organizationBalanceActual, precision);
-
+		
+		System.out.println("user expected        : " + userBalanceExpected + "  "
+				+ "user actual       : " + userBalanceActual);
+		System.out.println("Organization expected: " + organizationBalanceExpected + "  "
+				+ "Organization actual: " + organizationBalanceExpected );
 	}
 }
