@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -16,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreo.charity.beans.Event;
 import com.oreo.charity.middleTier.CreateEventService;
+
 import com.oreo.charity.middleTier.Delegate;
 
 @Controller
@@ -40,11 +42,12 @@ public class CharityController {
 		return "index";
 	}
 
+
+	@ResponseBody
 	@RequestMapping(value = { "/home" }, method = { RequestMethod.GET })
 	public String test(HttpSession session) {
-		/*
-		 * System.out.println("in Controller"); delegate.test();
-		 */
+		System.out.println("in Controller");
+		delegate.test();
 		return "charityHome";
 	}
 
@@ -82,6 +85,5 @@ public class CharityController {
 		//delegate.createNewEvent(event);
 		return new ResponseEntity(HttpStatus.CREATED);
 	}*/
+
 }
-
-

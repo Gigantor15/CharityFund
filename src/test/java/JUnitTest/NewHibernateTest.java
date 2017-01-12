@@ -32,24 +32,25 @@ public class NewHibernateTest {
 	public static void setup() {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
-
-	@Test
-	public void createEvent() {
-
-		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
-
-		Timestamp startDate = new Timestamp(System.currentTimeMillis());
-		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
-		Event event = new Event(10,"Skin Cancer", "stay indoors", startDate, endDate, 10000, org);
-		contxt.getBean(DataFacade.class).createEvent(event);
-		System.out.println("Event was created!");
-	}
-
-	// error opensession vs getcurrent
+	
 	@Test
 	@Ignore
-	public void testAssignNewBankAccount() {
-		BankAccount userBank = contxt.getBean(BankAccountDAO.class).get(3);
+	public void createEvent() {
+
+	Organization org = contxt.getBean(OrganizationDAO.class).get(1);
+
+	Timestamp startDate = new Timestamp(System.currentTimeMillis());
+	Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
+	Event event = new Event(7, "Skin Cancer", "stay indoors", startDate, endDate, 10000, org);
+	contxt.getBean(DataFacade.class).createEvent(event);
+	System.out.println("Event was created!");
+	}
+	
+	
+	@Test
+	@Ignore
+	public void testAssignNewBankAccount(){
+		BankAccount userBank= contxt.getBean(BankAccountDAO.class).get(3);
 		System.out.println(userBank);
 		User user = contxt.getBean(UserDAO.class).get(11);
 		System.out.println(user);

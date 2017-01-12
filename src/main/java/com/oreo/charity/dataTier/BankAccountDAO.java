@@ -25,6 +25,12 @@ public class BankAccountDAO {
 	}
 	
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void update(BankAccount account) {
+		sessionFactory.getCurrentSession().saveOrUpdate(account);
+	}
+	
+	
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void insert(BankAccount account){
 		sessionFactory.getCurrentSession().save(account);
 	}

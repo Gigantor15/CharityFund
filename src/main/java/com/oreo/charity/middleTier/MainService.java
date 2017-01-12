@@ -27,7 +27,7 @@ public class MainService {
 	}
 
 	public Event testGet() {
-		return contxt.getBean(DataFacade.class).getEvent();
+		return contxt.getBean(DataFacade.class).getEvent(1);
 	}
 
 }
