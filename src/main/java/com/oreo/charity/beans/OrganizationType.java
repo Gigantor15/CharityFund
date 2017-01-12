@@ -1,11 +1,11 @@
-package beans;
+package com.oreo.charity.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Entity()
 @Table(name = "CHARITY_ORGANIZATION_TYPE")
 public class OrganizationType {
 

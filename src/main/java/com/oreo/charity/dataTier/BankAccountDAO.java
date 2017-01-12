@@ -1,11 +1,11 @@
-package dataTier;
+package com.oreo.charity.dataTier;
 
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import beans.BankAccount;
+import com.oreo.charity.beans.BankAccount;
 
 public class BankAccountDAO {
 	private SessionFactory sessionFactory;
@@ -23,4 +23,16 @@ public class BankAccountDAO {
 	public BankAccount load(int id) {
 		return (BankAccount) sessionFactory.getCurrentSession().load(BankAccount.class, id);
 	}
+	
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void update(BankAccount account) {
+		sessionFactory.getCurrentSession().saveOrUpdate(account);
+	}
+	
+	
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void insert(BankAccount account){
+		sessionFactory.getCurrentSession().save(account);
+	}
+	
 }

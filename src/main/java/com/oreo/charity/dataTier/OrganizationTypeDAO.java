@@ -1,14 +1,13 @@
-package dataTier;
+package com.oreo.charity.dataTier;
 
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import beans.UserRole;
+import com.oreo.charity.beans.OrganizationType;
 
-public class UserRoleDAO {
-
+public class OrganizationTypeDAO {
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -16,13 +15,13 @@ public class UserRoleDAO {
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public UserRole get(int id) {
-		return (UserRole) sessionFactory.openSession().get(UserRole.class, id);
+	public OrganizationType get(int id) {
+		return (OrganizationType) sessionFactory.getCurrentSession().get(OrganizationType.class, id);
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public UserRole load(int id) {
-		return (UserRole) sessionFactory.openSession().load(UserRole.class, id);
+	public OrganizationType load(int id) {
+		return (OrganizationType) sessionFactory.getCurrentSession().load(OrganizationType.class, id);
 	}
 
 }

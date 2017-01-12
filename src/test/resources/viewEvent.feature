@@ -3,6 +3,14 @@ Feature: Check on event
   I can view running events
   So that I can view their progress
 
+    Scenario:  
+    Given I have an event
+    And I check on the event <goal>
+    When I see how much has been <donated>
+    Then I can view how much is <remaining> until the goal
+
+    
+
   Scenario Outline: 
     Given I have an event
     And I check on the event <goal>

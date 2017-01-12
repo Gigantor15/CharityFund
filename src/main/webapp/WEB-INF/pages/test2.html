@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+</head>
+<body>
+
+	<div id="addItem">
+		<h5>Add Items</h5>
+		Event ID <input id="eventId" type="number"><br /> 
+		Event Name <input id="eventName" type="text"><br /> 
+		Event Description<input	id="eventDescription" type="text"><br /> 
+		Event Start Date <input	id="startDate" type="date"><br /> 
+		Event End Date <input id="endDate" type="date"><br /> 
+		Event Goal Amount <input id="goalAmount" type="number"><br /> 
+		Event Organization <input id="organizationId" type="number"> <br /> 
+		<input id="addSubmit" type="submit" value="Add">
+	</div>
+</body>
+<script type="text/javascript">
+	$("#addSubmit").click(function() {
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		if(startDate != "" && endDate != ""){
+				var eventStart = new Date(startDate);
+				var eventEnd = new Date(endDate);
+				var obj = {
+					eventId : $("#eventId"),
+					eventName : $("#eventName").val(),
+					eventDescription : $("#eventDescription").val(),
+					startDate : eventStart,
+					endDate : eventEnd,
+					/* startDate : $("#startDate").datepicker(),
+					endDate : $("#endDate").datepicker(), */
+					goalAmount : $("#goalAmount").val(),
+					organizationId : $("organizationId").val()
+				};
+			$.ajax({
+				type : "POST",
+				data : JSON.stringify(obj),
+				dataType : 'json',
+				contentType : 'application/json',
+				url : "http://localhost:9001/CharityFund/insert",
+				success: function(response){
+					console.log(response.obj.eventName);
+				},
+				error: function(response){
+					console.log("error");
+				}
+			});		
+		}
+	});
+</script>
+</html>

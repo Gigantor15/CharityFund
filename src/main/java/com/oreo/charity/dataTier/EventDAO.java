@@ -1,11 +1,11 @@
-package dataTier;
+package com.oreo.charity.dataTier;
 
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import beans.Event;
+import com.oreo.charity.beans.Event;
 import java.util.List;
 
 public class EventDAO {
@@ -29,10 +29,10 @@ public class EventDAO {
 	public void insert(Object obj) {
 		sessionFactory.getCurrentSession().save(obj);
 	}
-        
-        @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-        public List<Event> getAll(){
-            List eventList = sessionFactory.getCurrentSession().createCriteria(Event.class).list();
-            return eventList;
-        }
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public List<Event> getAllEvents() {
+		List eventList = sessionFactory.getCurrentSession().createCriteria(Event.class).list();
+		return eventList;
+	}
 }

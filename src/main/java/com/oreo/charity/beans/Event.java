@@ -1,4 +1,4 @@
-package beans;
+package com.oreo.charity.beans;
 
 import java.sql.Timestamp;
 import javax.persistence.*;
@@ -16,7 +16,7 @@ public class Event {
     @Column(name="EVENT_NAME", nullable=false, unique=true, updatable=false)
     private String eventName;
     
-    @Column(name="EVENT_DESCRIPTION", nullable=false, unique=true, updatable=false)
+    @Column(name="EVENT_DESCRIPTION", unique=true, updatable=false)
     private String description;
     
     @Column(name="EVENT_START_DATE", nullable=false, unique=true, updatable=false)
@@ -36,19 +36,21 @@ public class Event {
         super();
     }
 
+ 
     public Event(int eventId, String eventName, String description, Timestamp startDate, Timestamp endDate,
-    		double goalAmount, Organization organizationId) {
-        super();
-        this.eventId = eventId;
-        this.eventName = eventName;
-        this.description = description;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.goalAmount = goalAmount;
-        this.organizationId = organizationId;
-    }
+			double goalAmount, Organization organizationId) {
+		super();
+		this.eventId = eventId;
+		this.eventName = eventName;
+		this.description = description;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.goalAmount = goalAmount;
+		this.organizationId = organizationId;
+	}
 
-    @Override
+
+	@Override
     public String toString() {
         return "Event [eventId=" + eventId + ", eventName=" + eventName + ", description=" + description
                 + ", startDate=" + startDate + ", endDate=" + endDate + ", goalAmount=" + goalAmount

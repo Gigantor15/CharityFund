@@ -1,4 +1,4 @@
-package beans;
+package com.oreo.charity.beans;
 
 import javax.persistence.*;
 
@@ -25,11 +25,11 @@ public class User {
 	@Column(name = "USER_EMAIL")
 	private String email;
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_BANK_ID")
 	private BankAccount bankAccount;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_ROLE_ID")
 	private UserRole userRole;
 
