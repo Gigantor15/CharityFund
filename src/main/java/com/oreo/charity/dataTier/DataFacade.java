@@ -16,7 +16,6 @@ public class DataFacade {
 
 	// Contextual Session
 	BankAccountDAO bankAccountDAO;
-
 	public void setBankAccountDAO(BankAccountDAO bankAccountDAO) {
 		this.bankAccountDAO = bankAccountDAO;
 	}
@@ -77,19 +76,16 @@ public class DataFacade {
 		bankAccountDAO.insert(account);
 	}
 	
-	public BankAccount 			getBankAccount() {return bankAccountDAO.get(1); }
-	public OrganizationType 	getOrganizationType() { return organizationTypeDAO.get(1);}
-	public UserRole 			getUserRole() { return userRoleDAO.get(1); }
-	public Donation 			getDonation() { return donationDAO.get(1); }
-	public Event 				getEvent() { return eventDAO.get(1); }
-	public Organization 		getOrganization() { return organizationDAO.get(1); }
-	public User 				getUser() { return userDAO.get(1);}
-
-
-
-	/*
-	 * public void createEvent(List<Event> events){ for(Event event : events){
-	 * eventDAO.insert(event); System.out.println("Event was inserted"); } }
-	 */
-
+	public BankAccount 			getBankAccount(int bankAccountId ) {return bankAccountDAO.get(bankAccountId); }
+	public OrganizationType 	getOrganizationType(int organizationId) { return organizationTypeDAO.get(organizationId);}
+	public UserRole 			getUserRole(int userRoleId) { return userRoleDAO.get(userRoleId); }
+	public Donation 			getDonation(int donationId) { return donationDAO.get(donationId); }
+	public Event 				getEvent(int eventId) { return eventDAO.get(eventId); }
+	public Organization 		getOrganization(int organizationId) { return organizationDAO.get(organizationId); }
+	public User 				getUser(int userId) { return userDAO.get(userId);}
+	
+	
+	public void update(BankAccount account) {
+		bankAccountDAO.update(account);
+	}
 }

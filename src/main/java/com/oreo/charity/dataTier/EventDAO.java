@@ -29,10 +29,10 @@ public class EventDAO {
 	public void insert(Object obj) {
 		sessionFactory.getCurrentSession().save(obj);
 	}
-        
-        @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-        public List<Event> getAllEvents(){
-            List eventList = sessionFactory.openSession().createCriteria(Event.class).list();
-            return eventList;
-        }
+
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public List<Event> getAllEvents() {
+		List eventList = sessionFactory.openSession().createCriteria(Event.class).list();
+		return eventList;
+	}
 }

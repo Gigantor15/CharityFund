@@ -1,5 +1,7 @@
 package JUnitTest;
 
+import java.sql.Timestamp;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,8 +33,22 @@ public class NewHibernateTest {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
 	
-	// error opensession vs getcurrent
 	@Test
+	@Ignore
+	public void createEvent() {
+
+	Organization org = contxt.getBean(OrganizationDAO.class).get(1);
+
+	Timestamp startDate = new Timestamp(System.currentTimeMillis());
+	Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
+	Event event = new Event(7, "Skin Cancer", "stay indoors", startDate, endDate, 10000, org);
+	contxt.getBean(DataFacade.class).createEvent(event);
+	System.out.println("Event was created!");
+	}
+	
+	
+	@Test
+	@Ignore
 	public void testAssignNewBankAccount(){
 		BankAccount userBank= contxt.getBean(BankAccountDAO.class).get(3);
 		System.out.println(userBank);
@@ -53,13 +69,13 @@ public class NewHibernateTest {
 	@Test
 	@Ignore
 	public void testFacade(){
-		System.out.println( contxt.getBean(DataFacade.class).getBankAccount() );
-		System.out.println( contxt.getBean(DataFacade.class).getDonation() );
-		System.out.println( contxt.getBean(DataFacade.class).getEvent() );
-		System.out.println( contxt.getBean(DataFacade.class).getOrganization() );
-		System.out.println( contxt.getBean(DataFacade.class).getOrganizationType() );
-		System.out.println( contxt.getBean(DataFacade.class).getUser() );
-		System.out.println( contxt.getBean(DataFacade.class).getUserRole() );
+		System.out.println( contxt.getBean(DataFacade.class).getBankAccount(1) );
+		System.out.println( contxt.getBean(DataFacade.class).getDonation(1) );
+		System.out.println( contxt.getBean(DataFacade.class).getEvent(1) );
+		System.out.println( contxt.getBean(DataFacade.class).getOrganization(1) );
+		System.out.println( contxt.getBean(DataFacade.class).getOrganizationType(1) );
+		System.out.println( contxt.getBean(DataFacade.class).getUser(1) );
+		System.out.println( contxt.getBean(DataFacade.class).getUserRole(1) );
 	}
 	
 	@Test

@@ -16,16 +16,16 @@ public class Event {
     @Column(name="EVENT_NAME", nullable=false, unique=true, updatable=false)
     private String eventName;
     
-    @Column(name="EVENT_DESCRIPTION", nullable=false, unique=true, updatable=false)
+    @Column(name="EVENT_DESCRIPTION", unique=true, updatable=false)
     private String description;
     
-    @Column(name="EVENT_START_DATE", nullable=false, unique=true, updatable=false)
+    @Column(name="EVENT_START_DATE", unique=true, updatable=false)
     private Timestamp startDate;
     
-    @Column(name="EVENT_END_DATE", nullable=false, unique=true, updatable=false)
+    @Column(name="EVENT_END_DATE", unique=true, updatable=false)
     private Timestamp endDate;
     
-    @Column(name="EVENT_GOAL_AMOUNT", nullable=false, unique=true, updatable=false)
+    @Column(name="EVENT_GOAL_AMOUNT", unique=true, updatable=false)
     private double goalAmount;
     
     @ManyToOne(cascade=CascadeType.REMOVE, fetch=FetchType.EAGER) 	

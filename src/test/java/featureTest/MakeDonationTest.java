@@ -1,42 +1,89 @@
 package featureTest;
 
-import cucumber.api.PendingException;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.oreo.charity.beans.BankAccount;
+import com.oreo.charity.dataTier.DataFacade;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class MakeDonationTest {
 	
-	int donateAmount;
+	//given that user is logged in and on event page
+	static int userId  = 1;
+	static int eventId = 1;
+	static ApplicationContext contxt;
+	double donateAmount;
 	
+	double userStartBalance;
+	double organizationStartBalance;
 	
-	@Given("^user enter the amount of money to donate$")
-	public void user_enter_the_amount_of_money_to_donate() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	@BeforeClass
+	public static void setup() {
+		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
-
-	@Given("^user have enough money in my bank to donate$")
-	public void user_have_enough_money_in_my_bank_to_donate() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	
+	@Before
+	@Given("^user enter donation amount and has sufficient fund$")
+	public void user_enter_donation_amount_and_has_sufficient_fund() throws Throwable {
+		// user enters amount
+		donateAmount = 100;
+		
+		// checks if user has sufficient fund
+		userStartBalance = contxt.getBean(DataFacade.class).getUser(userId).getBankAccount().getBalance();
+		organizationStartBalance = contxt.getBean(DataFacade.class).getEvent(eventId).getOrganizationId().getBankId().getBalance();
+		
+		if(userStartBalance>donateAmount){
+			System.out.println(userStartBalance + " :userAmount > donationAmount: " + donateAmount);
+		}else {
+			System.out.println("User does not have enough money");
+		}
+		
 	}
-
+	
+	@Test
 	@When("^user click donate$")
 	public void user_click_donate() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		// clicks donate
+	    	
+		// transfer the donation amount from user to event organization
+		BankAccount userBank = contxt.getBean(DataFacade.class).getUser(userId).getBankAccount();
+		BankAccount organizationBank = contxt.getBean(DataFacade.class).getEvent(eventId).getOrganizationId().getBankId();
+		
+		userBank.setBalance(userStartBalance-donateAmount);
+		organizationBank.setBalance(organizationStartBalance+donateAmount);
+		System.out.println(organizationBank.getBalance());
+		System.out.println(userBank.getBalance());
+		
+		contxt.getBean(DataFacade.class).update(userBank);
+		contxt.getBean(DataFacade.class).update(organizationBank);
 	}
+	
+	@After
+	@Then("^donation amount will be subtracted from user account and added into organization account$")
+	public void donation_amount_will_be_subtracted_from_user_account_and_added_into_organization_account() throws Throwable {
+		double userBalanceActual = contxt.getBean(DataFacade.class).getUser(userId).getBankAccount().getBalance();
+		double organizationBalanceActual = contxt.getBean(DataFacade.class).getEvent(eventId).getOrganizationId().getBankId().getBalance();
+		
+		double userBalanceExpected = userStartBalance - donateAmount;
+		double organizationBalanceExpected = organizationStartBalance - donateAmount;
+		
+		double precision = 1;
+		
+		
+		assertEquals(userBalanceExpected, userBalanceActual, precision);
+		assertEquals(organizationBalanceExpected, organizationBalanceActual, precision);
 
-	@Then("^users bank amount will be subtracted by donated amount$")
-	public void users_bank_amount_will_be_subtracted_by_donated_amount() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
-	@Then("^events organization bank amount will be added by the donated amount$")
-	public void events_organization_bank_amount_will_be_added_by_the_donated_amount() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
 	}
 }
