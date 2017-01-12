@@ -69,13 +69,13 @@ public class NewHibernateTest {
 	@Test
 	@Ignore
 	public void testFacade() {
-		System.out.println(contxt.getBean(DataFacade.class).getBankAccount());
-		System.out.println(contxt.getBean(DataFacade.class).getDonation());
-		System.out.println(contxt.getBean(DataFacade.class).getEvent());
-		System.out.println(contxt.getBean(DataFacade.class).getOrganization());
-		System.out.println(contxt.getBean(DataFacade.class).getOrganizationType());
-		System.out.println(contxt.getBean(DataFacade.class).getUser());
-		System.out.println(contxt.getBean(DataFacade.class).getUserRole());
+		System.out.println(contxt.getBean(DataFacade.class).getBankAccount(1));
+		System.out.println(contxt.getBean(DataFacade.class).getDonation(1));
+		System.out.println(contxt.getBean(DataFacade.class).getEvent(1));
+		System.out.println(contxt.getBean(DataFacade.class).getOrganization(1));
+		System.out.println(contxt.getBean(DataFacade.class).getOrganizationType(1));
+		System.out.println(contxt.getBean(DataFacade.class).getUser(1));
+		System.out.println(contxt.getBean(DataFacade.class).getUserRole(1));
 	}
 
 	@Test
