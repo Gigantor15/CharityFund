@@ -92,4 +92,8 @@ public class DataFacade {
 	
 	public void update(BankAccount account) {bankAccountDAO.update(account);}
 
+	public List<Event> getAllEvents() {
+		return eventDAO.getAllEvents();
+	}
+
 }
