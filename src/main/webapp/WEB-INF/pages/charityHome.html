@@ -25,6 +25,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="event.js"></script>
 </head>
 
 <body>
@@ -63,9 +64,14 @@
 		</div>
 	</nav>
 	<!-- End of navigation bar -->
-	<h1>Hello "Name of Organization"</h1>
-	<p>Welcome to the Charity Fund site. Create and monitor Charity
-		Events for your Organization!</p>
+	
+	
+	
+	
+<!-- ---------------------Main Table of Page----------------------- -->	
+	<h1><strong>Hello "Name of Organization"</strong></h1>
+	<p><h3>Welcome to the Charity Fund site. Create and monitor Charity
+		Events for your Organization!</h3></p>
 	<div class="charityContainer">
 		<form action=#>
 			<!-- submit a form -->
@@ -119,10 +125,7 @@
 								<td><input type="date" class="new-event-control" id="enddate" placeholder="Enter End Date"></td>
 							</tr>
 						</table>
-							
-							
-							
-							
+
 						</div>
 						<button class="addEvent" type="submit" class="btn btn-primary">Submit
 							Event</button>
@@ -136,42 +139,5 @@
 	</div>
 
 </body>
-<script type="text/javascript">
-	$(".addEvent").click(function() {
-		var eventname = $("#eventname").val();
-		var description = $("#description").val();
-		var goal = $("#goal").val();
-		var enddate = $("#enddate").val();
-		var obj = JSON.stringify({
-			"eventname" : eventname,
-			"description" : description,
-			"goal" : goal,
-			"enddate" : enddate
-		});
-		$.ajax({
-			method : "POST",
-			url : "http://localhost:9001/CharityFund/home/insert",
-			data : obj
-		});
-		getEvent();
-	});
 
-	function getEvent() {
-		$(".table tbody tr").remove();
-		$.ajax({
-			method : "POST",
-			url : "http://localhost:9001/CharityFund/home/getAll",
-			success : function(resp) {
-				var iterable = resp.events;
-				$.each(iterable, function(i, item) {
-					var event = "<tr>" + "<td>" + item.eventname + "</td>"
-							+ "<td>" + item.description + "</td>" + "<td>"
-							+ item.goal + "</td>" + "<td>" + item.enddate
-							+ "</td>" + "</tr>";
-					$(".table tbody").append(event);
-				});
-			}
-		});
-	}
-</script>
 </html>

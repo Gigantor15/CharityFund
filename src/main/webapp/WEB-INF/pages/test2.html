@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div id="addItem">
+		<h5>Add Items</h5>
+		Event ID <input id="eventId" type="number"><br/> 
+		Event Name <input id="eventName" type="text"><br/>
+		Event Description<input id="eventDescription" type="text"><br/>
+		Event Start Date <input id="startDate" type="date"><br/>
+		Event End Date <input id="endDate" type="date"><br/>
+		Event Goal Amount <input id="goalAmount" type="number"><br/>
+		Event Organization <input id="organizationId" type="number"> <br/>
+		<input id="addSubmit" type="submit" value="Add">
+	</div>
+</body>
+<script type="text/javascript">
+	$("#addSubmit").click(function(){
+		var obj = {
+			eventId : 15,
+			eventName : $("#eventName").val(),
+			eventDescription : $("#eventDescription").val(),
+			startDate : 01/11/2017,
+			endDate : 01/15/2017,
+			goalAmount : $("#goalAmount").val(),
+			organizationId : 1
+		}
+		$.ajax({
+			method: "POST",
+			dataType : 'json',
+			contentType : 'application/json; charset=utf-8',
+			url: "http://localhost:9001/CharityFund/home/insert",
+			data: JSON.stringify(obj)
+		});
+	});
+</script>
+</html>

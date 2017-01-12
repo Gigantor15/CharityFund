@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+	<h2>Event</h2>
+	<table id="event">
+		<thead>
+			<tr>
+				<th>Event ID</th>
+				<th>Event Name</th>
+				<th>Description</th>
+				<th>Goal</th>
+				<th>End Date</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<button id="go">check</button>
+
+
+
+	<h1>Add Event</h1>
+	Event Name:<input type="text" id="eventName" /><br />
+	Description:<input type="text" id="description" /><br />
+	Goal:<input type="number" id="goal"/><br/>
+	End Date:<input type="date" id="endDate"/><br/>
+	<button id="add">Add</button>
+
+	<h1>Update Event</h1>
+	Where? (Event ID):<input type="number" id="eventId" /><br /> 
+	Event Name:<input type="text" id="updateName" /><br /> 
+	Description:<input type="text" id="updateDescription" /><br/>
+	Goal:<input type="number" id="updateGoal"/><br/>
+	End Date:<input type="date" id="updateEndDate"/><br/>
+	<button id="update">update</button>
+
+	<h1>Delete Event</h1>
+	Which Event? (Event ID):<input type="text" id="deleteId" /><br />
+	<button id="delete">Delete</button>
+
+	<h1>Event By ID</h1>
+	<table id="eventById">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Event Name</th>
+				<th>Description</th>
+				<th>Goal</th>
+				<th>End Date</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	Which Event? (Event ID):<input type="text" id="getByIDEvent" /><br />
+	<button id="get_by_id">Get by ID</button>
+
+
+	<h1>get All Events</h1>
+	<table id="allEvent">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Event Name</th>
+				<th>Description</th>
+				<th>Goal</th>
+				<th>End Date</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	<button id="getAll">Get all Events</button>
+
+</body>
+
+<script type="text/javascript">
+	$("#add").click(function() {
+		var event_name = $("#eventName").val();
+		var event_description = $("#description").val();
+		var event_goal = $("goal").val();
+		var event_endDate = $("endDate").val();
+		var obj = JSON.stringify({
+			eventName : event_name,
+			description : event_description,
+			goal : event_goal,
+			endDate : event_endDate
+		});
+		$.ajax({
+			method : "POST",
+			url : "http://localhost:7001/ajax/insert",
+			data : obj
+		});
+	});
+	$("#update").click(function() {
+		var event_id = $("#eventId").val();
+		var event_name = $("#updateName").val();
+		var event_description = $("#updateDescription").val();
+		var event_goal = $("updateGoal").val();
+		var event_endDate = $("updateEndDate").val();
+		var obj = JSON.stringify({
+			eventId : event_id,
+			updateName : event_name,
+			updateDescription : event_description,
+			updateGoal : event_goal,
+			updateEndDate : event_endDate
+		});
+		$.ajax({
+			method : "POST",
+			url : "http://localhost:7001/ajax/update",
+			data : obj
+		});
+	});
+	$("#delete").click(function() {
+		var event_id = $("#deleteId").val();
+		var obj = JSON.stringify({
+			id : event_id
+		});
+		$.ajax({
+			method : "POST",
+			url : "http://localhost:7001/ajax/delete",
+			data : obj
+		});
+	});
+	$("#get_by_id").click(
+			function() {
+				var event_id = $("#getByIDEvent").val();
+				console.log(event_id);
+				var obj = JSON.stringify({
+					id : event_id
+				});
+				$.ajax({
+					method : "POST",
+					url : "http://localhost:7001/ajax/getById",
+					data : {
+						id : event_id
+					},
+					success : function(resp) {
+						var row = "<tr><td>" + resp.eventId + "</td>" + "<td>"
+								+ resp.eventName + "</td>" + "<td>" + resp.description
+								+ resp.goal + "</td>" + "<td>" + resp.endDate
+								+ "</td>"
+						$("#traineeById tbody").append(row);
+					}
+				});
+			});
+	$("#getAll").click(
+			function() {
+				$.ajax({
+					method : "POST",
+					url : "http://localhost:7001/ajax/getAll",
+					success : function(resp) {
+
+						var iterable = resp.events;
+						$.each(iterable, function(i, item) {
+							var event = "<tr>" + "<td>" + item.eventId + "</td>"
+									+ "<td>" + item.eventName + "</td>" + "<td>"
+									+ item.description + "</td>" +"<td>" 
+									+ item.goal + "</td>" + "<td>"
+									+ item.endDate + "</td>" + "</tr>";
+							$("#allEvent tbody").append(event);
+						});
+					}
+				});
+			});
+</script>
+</html>

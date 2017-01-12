@@ -14,6 +14,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,12 @@ public class CharityController {
 	public String testget(HttpSession session) {
 		return delegate.testGet().toString();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/home/getAll" }, method = { RequestMethod.GET })
+	public String getAll(HttpSession session) {
+		return delegate.testGet().toString();
+	}
 
 	@ResponseBody
 	@RequestMapping(value = { "/login" }, method = { RequestMethod.POST })
@@ -59,14 +66,22 @@ public class CharityController {
 		return "test";
 	}
 
-	@RequestMapping(value = "/home/insert", method = RequestMethod.POST, consumes = "application/json")
-	public @ResponseBody HttpEntity createEvent(@RequestBody @Valid Event event, BindingResult result) {
+	@SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/insert", method = RequestMethod.POST, consumes = "application/json")
+    public ResponseEntity insertEvent(@RequestBody Event event) {
+        System.out.println(event);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+	
+/*	@RequestMapping(value = "/home/insert", method = RequestMethod.POST, consumes = "application/json")
+	public HttpEntity createEvent(@RequestBody String event) {
+		System.out.println(event);
 		if (result.hasErrors()) {
 			return new ResponseEntity("Failed", HttpStatus.BAD_REQUEST);
 		}
-		// businessDelegate.createReservation(reservation);
-		return new ResponseEntity<Event>(event, HttpStatus.CREATED);
-	}
+		//delegate.createNewEvent(event);
+		return new ResponseEntity(HttpStatus.CREATED);
+	}*/
 }
 
 

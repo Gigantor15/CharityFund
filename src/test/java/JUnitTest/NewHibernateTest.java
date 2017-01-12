@@ -1,5 +1,7 @@
 package JUnitTest;
 
+import java.sql.Timestamp;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -23,25 +25,38 @@ import com.oreo.charity.dataTier.UserDAO;
 import com.oreo.charity.dataTier.UserRoleDAO;
 
 public class NewHibernateTest {
-	
+
 	private static ApplicationContext contxt;
 
 	@BeforeClass
 	public static void setup() {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
-	
+
+	@Test
+	public void createEvent() {
+
+		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
+
+		Timestamp startDate = new Timestamp(System.currentTimeMillis());
+		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
+		Event event = new Event(10,"Skin Cancer", "stay indoors", startDate, endDate, 10000, org);
+		contxt.getBean(DataFacade.class).createEvent(event);
+		System.out.println("Event was created!");
+	}
+
 	// error opensession vs getcurrent
 	@Test
-	public void testAssignNewBankAccount(){
-		BankAccount userBank= contxt.getBean(BankAccountDAO.class).get(3);
+	@Ignore
+	public void testAssignNewBankAccount() {
+		BankAccount userBank = contxt.getBean(BankAccountDAO.class).get(3);
 		System.out.println(userBank);
-		User user =  contxt.getBean(UserDAO.class).get(11);
+		User user = contxt.getBean(UserDAO.class).get(11);
 		System.out.println(user);
 		user.setBankAccount(userBank);
 		contxt.getBean(UserDAO.class).update(user);
 	}
-	
+
 	@Test
 	@Ignore
 	public void testBankAccountInsert() {
@@ -49,23 +64,23 @@ public class NewHibernateTest {
 		contxt.getBean(DataFacade.class).insertBankAccount(account);
 		System.out.println("success");
 	}
-	
+
 	@Test
 	@Ignore
-	public void testFacade(){
-		System.out.println( contxt.getBean(DataFacade.class).getBankAccount() );
-		System.out.println( contxt.getBean(DataFacade.class).getDonation() );
-		System.out.println( contxt.getBean(DataFacade.class).getEvent() );
-		System.out.println( contxt.getBean(DataFacade.class).getOrganization() );
-		System.out.println( contxt.getBean(DataFacade.class).getOrganizationType() );
-		System.out.println( contxt.getBean(DataFacade.class).getUser() );
-		System.out.println( contxt.getBean(DataFacade.class).getUserRole() );
+	public void testFacade() {
+		System.out.println(contxt.getBean(DataFacade.class).getBankAccount());
+		System.out.println(contxt.getBean(DataFacade.class).getDonation());
+		System.out.println(contxt.getBean(DataFacade.class).getEvent());
+		System.out.println(contxt.getBean(DataFacade.class).getOrganization());
+		System.out.println(contxt.getBean(DataFacade.class).getOrganizationType());
+		System.out.println(contxt.getBean(DataFacade.class).getUser());
+		System.out.println(contxt.getBean(DataFacade.class).getUserRole());
 	}
-	
+
 	@Test
 	@Ignore
 	public void testGetFromEveryTable() {
-		
+
 		BankAccount bean1 = contxt.getBean(BankAccountDAO.class).get(1);
 		OrganizationType bean6 = contxt.getBean(OrganizationTypeDAO.class).get(1);
 		UserRole bean2 = contxt.getBean(UserRoleDAO.class).get(1);
