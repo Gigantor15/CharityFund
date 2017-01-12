@@ -37,7 +37,7 @@ public class MakeDonationTest {
 	@Given("^user enter donation amount and has sufficient fund$")
 	public void user_enter_donation_amount_and_has_sufficient_fund() throws Throwable {
 		// user enters amount
-		donateAmount = 100;
+		donateAmount = 10;
 		
 		// checks if user has sufficient fund
 		userStartBalance = contxt.getBean(DataFacade.class).getUser(userId).getBankAccount().getBalance();
@@ -73,6 +73,7 @@ public class MakeDonationTest {
 	@After
 	@Then("^donation amount will be subtracted from user account and added into organization account$")
 	public void donation_amount_will_be_subtracted_from_user_account_and_added_into_organization_account() throws Throwable {
+		
 		// Expected Result to test
 		double userBalanceExpected = userStartBalance - donateAmount;
 		double organizationBalanceExpected = organizationStartBalance + donateAmount;
@@ -88,8 +89,8 @@ public class MakeDonationTest {
 		assertEquals(userBalanceExpected, userBalanceActual, precision);
 		assertEquals(organizationBalanceExpected, organizationBalanceActual, precision);
 		
-		System.out.println("user expected        : " + userBalanceExpected + "  "
-				+ "user actual       : " + userBalanceActual);
+		System.out.println("user expected        : " + userBalanceExpected + "   "
+				+ "user actual        : " + userBalanceActual);
 		System.out.println("Organization expected: " + organizationBalanceExpected + "  "
 				+ "Organization actual: " + organizationBalanceExpected );
 	}
