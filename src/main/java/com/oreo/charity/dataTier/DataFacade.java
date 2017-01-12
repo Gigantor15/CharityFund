@@ -81,7 +81,6 @@ public class DataFacade {
 	 * eventDAO.insert(event); System.out.println("Event was inserted"); } }
 	 */
 
-
 	public BankAccount 			getBankAccount(int bankAccountId ) {return bankAccountDAO.get(bankAccountId); }
 	public OrganizationType 	getOrganizationType(int organizationId) { return organizationTypeDAO.get(organizationId);}
 	public UserRole 			getUserRole(int userRoleId) { return userRoleDAO.get(userRoleId); }
@@ -91,8 +90,6 @@ public class DataFacade {
 	public User 				getUser(int userId) { return userDAO.get(userId);}
 	
 	
-	public void update(BankAccount account) {
-		bankAccountDAO.update(account);
-	}
+	public void update(BankAccount account) {bankAccountDAO.update(account);}
 
 }
