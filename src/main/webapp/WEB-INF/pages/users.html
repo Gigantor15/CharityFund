@@ -187,7 +187,6 @@
                     <h2 class="text-center text-warning">Charity Events</h2>
                     <div id="charity-events">
                         
-                        
                     </div>
                   </div>
                 </div>
@@ -252,7 +251,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                    PETA is an organization that helps animals in need. Preventing the hunting of animals, for unneccassary needs.
+                    PETA is an organization that helps animals in need. Preventing the hunting of animals, for unnecessary needs.
                     Help us in our cause to stop the mass executions and mistreatment of these rare species animals. Your donation 
                     would be greatly appreciated. 
                 </p>
@@ -266,7 +265,7 @@
                   <input type="value" class="form-control" id="donationAmount" placeholder="Amount">
                 </div>
               </div>
-            </form>
+            
               <p class="text-warning">
                 <small>Review before submission.</small>
               </p>
@@ -275,6 +274,8 @@
               <button id="donate" type="button" class="btn btn-default" data-dismiss="modal">Donate</button>
               
             </div>
+              
+            </form>   
           </div>
         </div>
       </div>
@@ -426,4 +427,21 @@
 
 
   </body>
+  
+  
+  <script>
+	jQuery(document).ready(function($) {
+		$("#search-form").submit(function(event) {
+			// Disble the search button
+			enableSearchButton(false);
+			// Prevent the form from submitting via the browser.
+			event.preventDefault();
+			searchViaAjax();
+		});
+	});
+
+
+</script>
+
+</body>
 </html>
