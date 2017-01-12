@@ -44,11 +44,8 @@ public class MakeDonationTest {
 		userStartBalance = contxt.getBean(DataFacade.class).getUser(userId).getBankAccount().getBalance();
 		organizationStartBalance = contxt.getBean(DataFacade.class).getEvent(eventId).getOrganizationId().getBankId().getBalance();
 		
-		if(userStartBalance>donateAmount){
-			System.out.println(userStartBalance + " :userAmount > donationAmount: " + donateAmount);
-		}else {
-			System.out.println("User does not have enough money");
-		}
+		System.out.println("user start balance: " + userStartBalance);
+		System.out.println("Organization start balance: " + organizationStartBalance);
 		
 	}
 	
@@ -56,16 +53,20 @@ public class MakeDonationTest {
 	@When("^user click donate$")
 	public void user_click_donate() throws Throwable {
 		// clicks donate
-	    	
-		// transfer the donation amount from user to event organization
+		
+		// get the bank accounts involved
 		BankAccount userBank = contxt.getBean(DataFacade.class).getUser(userId).getBankAccount();
 		BankAccount organizationBank = contxt.getBean(DataFacade.class).getEvent(eventId).getOrganizationId().getBankId();
 		
+		// transfer the donation amount from user to event organization
 		userBank.setBalance(userStartBalance-donateAmount);
 		organizationBank.setBalance(organizationStartBalance+donateAmount);
-		System.out.println(organizationBank.getBalance());
-		System.out.println(userBank.getBalance());
 		
+		// print test
+		System.out.println("user current balance: " + userBank.getBalance());
+		System.out.println("Organization ccurrent balance: " + organizationBank.getBalance());
+		
+		// persist the changes in database
 		contxt.getBean(DataFacade.class).update(userBank);
 		contxt.getBean(DataFacade.class).update(organizationBank);
 	}
@@ -73,15 +74,18 @@ public class MakeDonationTest {
 	@After
 	@Then("^donation amount will be subtracted from user account and added into organization account$")
 	public void donation_amount_will_be_subtracted_from_user_account_and_added_into_organization_account() throws Throwable {
+		// Expected Result to test
+		double userBalanceExpected = userStartBalance - donateAmount;
+		double organizationBalanceExpected = organizationStartBalance + donateAmount;
+		
+		// Actual result to test
 		double userBalanceActual = contxt.getBean(DataFacade.class).getUser(userId).getBankAccount().getBalance();
 		double organizationBalanceActual = contxt.getBean(DataFacade.class).getEvent(eventId).getOrganizationId().getBankId().getBalance();
 		
-		double userBalanceExpected = userStartBalance - donateAmount;
-		double organizationBalanceExpected = organizationStartBalance - donateAmount;
+		// precision of double to compare
+		double precision = 0;
 		
-		double precision = 1;
-		
-		
+		// Actual comparation of expected and actual data
 		assertEquals(userBalanceExpected, userBalanceActual, precision);
 		assertEquals(organizationBalanceExpected, organizationBalanceActual, precision);
 
