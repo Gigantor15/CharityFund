@@ -1,5 +1,6 @@
 package com.oreo.charity.webTier;
 
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,24 @@ public class CharityController {
 	public void setDelegate(Delegate delegate) {
 		this.delegate = delegate;
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = { "/getAllEvents" }, method = RequestMethod.GET, produces = "application/json")
+	public List<Event> getAll() {
+		//Event event = new Event(1, "test", "test", null, null, 100, null);
+		//Event event1 = new Event(2, "test1", "test1", null, null, 100, null);
+		//Event event2 = new Event(3, "test2", "test2", null, null, 100, null);
+		
+		//List<Event> eventList = new ArrayList<Event>();
+		//eventList.add(event1);
+		//eventList.add(event2);
+		//eventList.add(event);
+		
+		List<Event> eventList = delegate.getAllEvents();
+		System.out.println(eventList);
+		return eventList;
+	}
+	
 	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
 	public String getHome(HttpSession session) {
 		return "index";

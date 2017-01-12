@@ -1,5 +1,7 @@
 package com.oreo.charity.middleTier;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,10 @@ public class MainService {
 
 	public Event testGet() {
 		return contxt.getBean(DataFacade.class).getEvent(1);
+	}
+
+	public List<Event> getAllEvents() {
+		return contxt.getBean(DataFacade.class).getAllEvents();
 	}
 
 }
