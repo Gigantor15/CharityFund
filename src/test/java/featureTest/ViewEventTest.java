@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-public class ViewFeatureTest {
+public class ViewEventTest {
     	static ApplicationContext contxt;
 	static int userID = 1;
 	static int eventID = 1;
