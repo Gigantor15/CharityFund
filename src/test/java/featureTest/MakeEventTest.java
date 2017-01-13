@@ -21,7 +21,10 @@ public class MakeEventTest {
 	
 	static int organizationId = 1;
 	static String organization;
+	static String event;
 	static ApplicationContext contxt;
+	static int eventId = 1;
+	static int eventId2 = 6; //change to whatever the new event you insert is
 	
 	@BeforeClass
 	public static void setup() {
@@ -42,14 +45,15 @@ public class MakeEventTest {
 
 		Timestamp startDate = new Timestamp(System.currentTimeMillis());
 		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
-		Event event = new Event(5, "Test", "stay indoors", startDate, endDate, 10000, org);
+		Event event = new Event(6, "Bang Bang Bang", "No sleep gang", startDate, endDate, 10000, org);
 		contxt.getBean(DataFacade.class).createEvent(event);
-		System.out.println("Event "+ event.getEventName() +" was created!");
+		System.out.println("Event "+ event.getEventName() +" whose cause is" + event.getDescription() +" was created!");
 	}
 
+	@Test
 	@Then("^I have new event listing on my homepage$")
 	public void i_have_new_event_listing_on_my_homepage() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    event = contxt.getBean(DataFacade.class).getEvent(eventId2).getEventName();
+	    if(event!=null) System.out.println("The event is " + event);
 	}
 }
