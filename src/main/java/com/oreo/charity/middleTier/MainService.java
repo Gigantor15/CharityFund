@@ -32,8 +32,5 @@ public class MainService {
 		return contxt.getBean(DataFacade.class).getEvent(1);
 	}
 
-	public List<Event> getAllEvents() {
-		return contxt.getBean(DataFacade.class).getAllEvents();
-	}
-
+	
 }
