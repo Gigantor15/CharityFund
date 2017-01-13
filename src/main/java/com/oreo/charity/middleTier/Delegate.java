@@ -44,7 +44,7 @@ public class Delegate {
 	}
 	
 	public List<Event> getAllEvents(){
-		return mainService.getAllEvents();
+		return userViewService.getAllEvents();
 	}
 
 }
