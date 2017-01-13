@@ -13,6 +13,7 @@ public class Delegate {
 
 	private MainService mainService;
 	private CreateEventService createEventService;
+        private UserViewService userViewService;
 
 	@Autowired
 	public void setMainService(MainService mainService) {
@@ -23,6 +24,11 @@ public class Delegate {
 	public void setUserService(CreateEventService createEventService){
 		this.createEventService = createEventService;
 	}
+        
+        @Autowired
+        public void setUserViewService(UserViewService userViewService){
+            this.userViewService = userViewService;
+        }
 
 	public void test() {
 		System.out.println("in delegate");
