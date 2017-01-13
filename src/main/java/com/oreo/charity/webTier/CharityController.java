@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreo.charity.beans.Event;
 import com.oreo.charity.middleTier.Delegate;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Map;
+import org.json.simple.JSONObject;
 
 @Controller
 public class CharityController {
@@ -27,7 +31,7 @@ public class CharityController {
 	
 	@ResponseBody
 	@RequestMapping(value = { "/getAllEvents" }, method = RequestMethod.GET, produces = "application/json")
-	public List<Event> getAll() {
+	public String getAll() {
 		//Event event = new Event(1, "test", "test", null, null, 100, null);
 		//Event event1 = new Event(2, "test1", "test1", null, null, 100, null);
 		//Event event2 = new Event(3, "test2", "test2", null, null, 100, null);
@@ -39,17 +43,29 @@ public class CharityController {
 		
 		List<Event> eventList = delegate.getAllEvents();
 		System.out.println(eventList);
-		return eventList;
+		return eventList.get(0).toString();
 	}
 	
 	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
 	public String getHome(HttpSession session) {
 		return "index";
 	}
-
-
+        
+        @ResponseBody
+        @RequestMapping(value = { "/donations" }, method = { RequestMethod.GET })
+	public String getDonations(HttpSession session) {
+                JSONObject obj = new JSONObject();
+                
+            List list = delegate.getAllDonations();
+            String toJSONString = JSONObject.toJSONString((Map) list);
+            
+            String donations = toJSONString;
+            return donations;
+	}
+        
+        
 	@ResponseBody
-	@RequestMapping(value = { "/home" }, method = { RequestMethod.GET })
+	@RequestMapping(value = { "/" }, method = { RequestMethod.GET })
 	public String test(HttpSession session) {
 		System.out.println("in Controller");
 		delegate.test();
@@ -74,7 +90,8 @@ public class CharityController {
 	public String getAll(HttpSession session) {
 		return delegate.testGet().toString();
 	}
-
+        
+               
 	@ResponseBody
 	@RequestMapping(value = { "/login" }, method = { RequestMethod.POST })
 	public String login (HttpSession session) {
