@@ -2,7 +2,9 @@ package featureTest;
 
 import java.sql.Timestamp;
 
+import org.junit.After;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,11 +26,13 @@ public class MakeEventTest {
 	static ApplicationContext contxt;
 	
 	@BeforeClass
+	@Ignore
 	public static void setup() {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
 
 	@Test
+	@Ignore
 	@Given("^I have a charity organization$")
 	public void i_have_a_charity_organization() throws Throwable {
 		organization = contxt.getBean(DataFacade.class).getOrganization(organizationId).getOrganizationName();
@@ -36,17 +40,20 @@ public class MakeEventTest {
 	}
 
 	@Test
+	@Ignore
 	@When("^I make an event$")
 	public void i_make_an_event() throws Throwable {
 		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
 
 		Timestamp startDate = new Timestamp(System.currentTimeMillis());
 		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
-		Event event = new Event(5, "Test", "stay indoors", startDate, endDate, 10000, org);
+		Event event = new Event(22, "Testtest", "stay indoors", startDate, endDate, 10000, org);
 		contxt.getBean(DataFacade.class).createEvent(event);
 		System.out.println("Event "+ event.getEventName() +" was created!");
 	}
-
+	
+	@After
+	@Ignore
 	@Then("^I have new event listing on my homepage$")
 	public void i_have_new_event_listing_on_my_homepage() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions

@@ -22,28 +22,31 @@
 		Event Start Date <input	id="startDate" type="date"><br /> 
 		Event End Date <input id="endDate" type="date"><br /> 
 		Event Goal Amount <input id="goalAmount" type="number"><br /> 
-		Event Organization <input id="organizationId" type="number"> <br /> 
+		<!-- Event Organization <input id="organizationId" type="number"> <br />  --> 
 		<input id="addSubmit" type="submit" value="Add">
 	</div>
 </body>
 <script type="text/javascript">
 	$("#addSubmit").click(function() {
-		var startDate = $("#startDate").val();
-		var endDate = $("#endDate").val();
+		var startDate = new Date($("#startDate").val());
+		var endDate = new Date($("#endDate").val());
+		
+		console.log(startDate);
+		console.log(endDate);
+		
 		if(startDate != "" && endDate != ""){
-				var eventStart = new Date(startDate);
-				var eventEnd = new Date(endDate);
+				//var eventStart = new Date(startDate);
+				//var eventEnd = new Date(endDate);
 				var obj = {
-					eventId : $("#eventId"),
-					eventName : $("#eventName").val(),
-					eventDescription : $("#eventDescription").val(),
-					startDate : eventStart,
-					endDate : eventEnd,
-					/* startDate : $("#startDate").datepicker(),
-					endDate : $("#endDate").datepicker(), */
-					goalAmount : $("#goalAmount").val(),
-					organizationId : $("organizationId").val()
-				};
+					"eventId" : $("#eventId").val(),
+					"eventName" : $("#eventName").val(),
+					"description" : $("#eventDescription").val(),
+					"startDate" : startDate,
+					"endDate" : endDate,
+					"goalAmount" : $("#goalAmount").val(),
+					"organizationId" : null
+					};
+				
 			$.ajax({
 				type : "POST",
 				data : JSON.stringify(obj),

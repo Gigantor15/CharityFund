@@ -30,7 +30,7 @@ public class Delegate {
 	}
 
 	public void createNewEvent(Event event){
-		createEventService.newEvent(event);
+		createEventService.createNewEvent(event);
 	}
 
 	public Event testGet() {

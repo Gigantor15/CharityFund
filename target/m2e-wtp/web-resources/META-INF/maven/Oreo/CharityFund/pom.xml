@@ -171,13 +171,13 @@
 			<version>2.2.3</version>
 		</dependency>
 
-		<!-- Will get an error without this(for Andrew) 
+		<!-- 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.0.2.GA</version>
 		</dependency>
-		-->
+		 -->
 
 
 	</dependencies>

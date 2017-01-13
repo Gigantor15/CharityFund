@@ -69,7 +69,8 @@ public class CharityController {
 	@SuppressWarnings("rawtypes")
     @RequestMapping(value = "/insert", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity insertEvent(@RequestBody Event event) {
-        delegate.createNewEvent(event);
+        
+		delegate.createNewEvent(event);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 	

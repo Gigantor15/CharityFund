@@ -18,7 +18,9 @@ public class CreateEventService {
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
 	
-	public void newEvent(Event event){
+	public void createNewEvent(Event event){
+		
+		event.setOrganizationId(contxt.getBean(DataFacade.class).getOrganization(1));
 		contxt.getBean(DataFacade.class).createEvent(event);
 		System.out.println(event);
 	}
