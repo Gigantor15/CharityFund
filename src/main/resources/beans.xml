@@ -46,20 +46,8 @@
 
 
 	<!-- DAO beans -->
-	<bean name="bankAccountDAO"      class="dataTier.BankAccountDAO">      <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="donationDAO"         class="dataTier.DonationDAO">         <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="eventDAO"            class="dataTier.EventDAO">            <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="organizationDAO"     class="dataTier.OrganizationDAO">     <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="organizationTypeDAO" class="dataTier.OrganizationTypeDAO"> <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="userDAO"             class="dataTier.UserDAO">             <property name="sessionFactory" ref="sf" /> </bean>
-	<bean name="userRoleDAO"         class="dataTier.UserRoleDAO">         <property name="sessionFactory" ref="sf" /> </bean>
-	
-	
-	<!-- Facade bean -->
-	<bean name="facade" class="dataTier.DataFacade">
-		<property name="bankAccountDAO" ref="bankAccountDAO" />
-                <property name="eventDAO" ref="eventDAO" />
-                <property name="organizationDAO" ref="organizationDAO" />   
+	<bean name="bankAccountDAO" class="com.oreo.charity.dataTier.BankAccountDAO">
+		<property name="sessionFactory" ref="sf" />
 	</bean>
 	<bean name="donationDAO" class="com.oreo.charity.dataTier.DonationDAO">
 		<property name="sessionFactory" ref="sf" />

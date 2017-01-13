@@ -23,6 +23,7 @@ import com.oreo.charity.dataTier.OrganizationDAO;
 import com.oreo.charity.dataTier.OrganizationTypeDAO;
 import com.oreo.charity.dataTier.UserDAO;
 import com.oreo.charity.dataTier.UserRoleDAO;
+import java.util.List;
 
 public class NewHibernateTest {
 
@@ -58,6 +59,39 @@ public class NewHibernateTest {
 		contxt.getBean(UserDAO.class).update(user);
 	}
 
+        @Test
+        public void testGetAllDonations(){
+            List list = contxt.getBean(DonationDAO.class).getAllDonations();
+            System.out.println("Testing: " + list);
+        }
+        
+        @Test
+        public void testGetDonationSum(){
+            
+            Event event = contxt.getBean(EventDAO.class).get(1);
+            double total = contxt.getBean(DonationDAO.class).sumOfDonations(event);
+            System.out.println("Testing sum:" + total);
+        }
+        
+        @Test
+        public void testGetMadeTo(){
+             Event event = contxt.getBean(EventDAO.class).get(1);
+            List list = contxt.getBean(DonationDAO.class).getMadeTo(event);
+            System.out.println("Testing Payment made To Event: " + list);
+        }
+        
+         @Test
+        public void testGetMadeBy(){
+             User user = contxt.getBean(UserDAO.class).get(1);
+            List list = contxt.getBean(DonationDAO.class).getMadeBy(user);
+            System.out.println("Testing Payment made To Event: " + list);
+        }
+        
+        
+        
+        
+        
+        
 	@Test
 	@Ignore
 	public void testBankAccountInsert() {

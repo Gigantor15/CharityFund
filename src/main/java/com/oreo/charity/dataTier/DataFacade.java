@@ -58,10 +58,7 @@ public class DataFacade {
 		System.out.println("in DataFacade");
 	}
 
-        public List<Organization> orgList(){
-            return organizationDAO.getAll();
-        }
-        
+               
         public List<Event> eventList(){
             return eventDAO.getAllEvents();
         }
@@ -95,5 +92,26 @@ public class DataFacade {
 	public List<Event> getAllEvents() {
 		return eventDAO.getAllEvents();
 	}
-
+        
+        public List<Organization> getAllOrganizations() {
+		return organizationDAO.getAllOrganizations();
+	}
+        
+        public List<Donation> getMadeBy(User user){
+            return donationDAO.getMadeBy(user);
+        }
+        
+        public List<Donation> getMadeTo(Event event){
+            return donationDAO.getMadeTo(event);
+        }
+        
+        public List<Donation> getAllDonations(){
+            return donationDAO.getAllDonations();
+        }
+        
+        public Double sumOfDonations(Event event){
+            return donationDAO.sumOfDonations(event);
+        }
+        
+        
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.oreo.charity.beans.Event;
+import com.oreo.charity.beans.*;
 
 
 @Component(value = "businessDelegate")
@@ -13,7 +13,7 @@ public class Delegate {
 
 	private MainService mainService;
 	private CreateEventService createEventService;
-        private UserViewService userViewService;
+        private ViewEventService viewEventService;
 
 	@Autowired
 	public void setMainService(MainService mainService) {
@@ -26,8 +26,8 @@ public class Delegate {
 	}
         
         @Autowired
-        public void setUserViewService(UserViewService userViewService){
-            this.userViewService = userViewService;
+        public void setUserViewService(ViewEventService viewEventService){
+            this.viewEventService = viewEventService;
         }
 
 	public void test() {
@@ -44,7 +44,29 @@ public class Delegate {
 	}
 	
 	public List<Event> getAllEvents(){
-		return userViewService.getAllEvents();
+		return viewEventService.getAllEvents();
 	}
+        
+        public List<Organization> getAllOrganizations(){
+            return viewEventService.getAllOrganizations();
+        }
+        
+        public List<Donation> getMadeBy(User user){
+            return viewEventService.getMadeBy(user);
+        }
+        
+        public List<Donation> getMadeTo(Event event){
+            return viewEventService.getMadeTo(event);
+        }
+        
+        public List<Donation> getAllDonations(){
+            return viewEventService.getAllDonations();
+        }
+        
+        public Double sumOfDonations(){
+            return viewEventService.sumOfDonations();
+        }
+
+ 
 
 }

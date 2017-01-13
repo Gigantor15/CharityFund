@@ -62,6 +62,13 @@ public class CharityController {
 		return delegate.testGet().toString();
 	}
 	
+        @ResponseBody
+        @RequestMapping(value = { "/user" }, method = { RequestMethod.GET })
+	public String users(HttpSession session) {
+            return "users";
+	}
+	
+        
 	@ResponseBody
 	@RequestMapping(value = { "/home/getAll" }, method = { RequestMethod.GET })
 	public String getAll(HttpSession session) {
