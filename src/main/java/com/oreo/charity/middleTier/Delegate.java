@@ -26,7 +26,7 @@ public class Delegate {
 	}
         
         @Autowired
-        public void setUserViewService(ViewEventService viewEventService){
+        public void setViewEventService(ViewEventService viewEventService){
             this.viewEventService = viewEventService;
         }
 

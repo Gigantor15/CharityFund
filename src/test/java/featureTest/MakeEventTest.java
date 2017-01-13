@@ -38,13 +38,13 @@ public class MakeEventTest {
 	@Test
 	@When("^I make an event$")
 	public void i_make_an_event() throws Throwable {
-		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
-
-		Timestamp startDate = new Timestamp(System.currentTimeMillis());
-		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
-		Event event = new Event(5, "Test", "stay indoors", startDate, endDate, 10000, org);
-		contxt.getBean(DataFacade.class).createEvent(event);
-		System.out.println("Event "+ event.getEventName() +" was created!");
+//		Organization org = contxt.getBean(OrganizationDAO.class).get(1);
+//
+//		Timestamp startDate = new Timestamp(System.currentTimeMillis());
+//		Timestamp endDate = Timestamp.valueOf("2017-01-15 1:10:10.0");
+//		Event event = new Event(5, "Test", "stay indoors", startDate, endDate, 10000, org);
+//		contxt.getBean(DataFacade.class).createEvent(event);
+//		System.out.println("Event "+ event.getEventName() +" was created!");
 	}
 
 	@Then("^I have new event listing on my homepage$")

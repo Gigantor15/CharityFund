@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 
-@Service(value = "mainservice")
+@Service(value = "ViewEventService")
 public class ViewEventService {
 
 	/*
@@ -28,7 +28,7 @@ public class ViewEventService {
 	}
 
 	public void test() {
-		System.out.println("in service");
+		System.out.println("in View Event Service");
 		contxt.getBean(DataFacade.class).test();
 	}
 

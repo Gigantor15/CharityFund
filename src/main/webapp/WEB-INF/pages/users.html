@@ -16,31 +16,8 @@
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
-  <script type="text/javascript">
-  
-  $("#donate").click(function(){
-  	var q = $("donationAmount").val();
-  	$.ajax({
-  		type:"GET",
-  		url:"http://localhost:9001/CharityFund/WEB-INF/pages/trainee?q="+q ,
-  		success: function(resp){
-  			if(resp){
-  				renderTrainee(resp);
-  			}else{
-  				renderError(resp);
-  			}
-  		}
-  	});
-  });
-  
-  function renderTrainee(resp){
-  	$("#output").html("<strong>"+ resp.name +"</strong> Major:" + resp.major);
-  }
-  function renderError(resp){
-  	$("#output").html("<strong>Does not exist</strong>");
-  }
-  
-  </script>
+ 
+ 
     <!-- <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css">-->
     <style type="text/css">
@@ -70,12 +47,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" id="logo"><span id="logo">CharityFund</span></a>
+          <a class="navbar-brand" href="/pages/charityHome.html" id="logo"><span id="logo">CharityFund</span></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li id="past-donatinos" class="active">
-              <a href="pastdonations.html">Past Donations</a>
+            <li id="past-donations" class="active">
+              <a href="" id="pastdonations" >Past Donations</a>
             </li>
             <li class="active dropdown" id="charities-list">
               <!--<button type="button" data-toggle="dropdown" class="btn btn-default
@@ -84,23 +61,21 @@
               aria-expanded="false" id="my-charities">Charities List</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="#myModal" data-toggle="modal">PETA</a>
+                  <a href="#myModal1" data-toggle="modal">PETA</a>
                 </li>
                 <li>
-                  <a href="#myModal" data-toggle="modal">Charity 2 Name</a>
+                  <a href="#myModal2" data-toggle="modal">St. Jude Organization</a>
                 </li>
                 <li>
-                  <a href="#myModal" data-toggle="modal">Charity 3 Name</a>
+                  <a href="#myModal3" data-toggle="modal">United Breast Cancer Group</a>
                 </li>
                 <li>
-                  <a href="#myModal" data-toggle="modal">Charity 4 Name</a>
+                  <a href="#myModal4" data-toggle="modal">Cancer Fighters</a>
                 </li>
                 <li>
-                  <a href="#myModal" data-toggle="modal">Charity 5 Name</a>
+                  <a href="#myModal5" data-toggle="modal">Homeless Help</a>
                 </li>
-                <li>
-                  <a href="#myModal" data-toggle="modal">Charity 6 Name</a>
-                </li>
+               
               </ul>
             </li>
             <li class="dropdown active" id="account">
@@ -108,24 +83,13 @@
               aria-expanded="false" id="account">Account<br></a>
               <ul class="dropdown-menu" role="menu">
                 <li id="settings">
-                  <a href="#">Action</a>
+                  <a href="#">Update Info</a>
                 </li>
                 <li>
-                  <a href="#">Another action</a>
+                  <a href="#">Update Settings</a>
                 </li>
                 <li>
-                  <a href="#">Something else here</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <a href="#">Separated link</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <a href="#">One more separated link</a>
-                </li>
-                <li id="update-info">
-                  <a href="#">Item</a>
+                  <a href="#">Log Out</a>
                 </li>
               </ul>
             </li>
@@ -178,9 +142,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <h2 class="text-center text-success" contenteditable="true">My Past Donations</h2>
-                    <div id="past-donations-section">
-                        
-                        
+                    <div id="output" ></div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -212,7 +174,7 @@
           </div>
         </div>
       </div>
-    </div>
+    
     <footer class="section section-primary text-left" id="footer">
       <div class="container">
         <div class="row">
@@ -242,7 +204,7 @@
       </div>
       
     </footer>
-    <div id="myModal" class="fade modal text-center">
+    <div id="myModal1" class="fade modal text-center">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -259,10 +221,10 @@
                 <form class="form-horizontal" role="form">
               <div class="form-group">
                 <div class="col-sm-2">
-                  <label for="donatinoAmount" class="control-label">Donation Amount</label>
+                  <label for="donationAmount" class="control-label">Donation Amount</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="value" class="form-control" id="donationAmount" placeholder="Amount">
+                  <input type="value" class="form-control" id="donationAmount" placeholder="Amount" />
                 </div>
               </div>
             
@@ -286,19 +248,21 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <a title="People for the Ethical Treatment of Animals"><h1>Charity 2</h1>
+              <a title="People for the Ethical Treatment of Animals"><h1>St. Jude Organization</h1></a>
             </div>
             <div class="modal-body">
                 <p>
-                    PETA is an organization that helps animals in need. Preventing the hunting of animals, for unneccassary needs.
-                    Help us in our cause to stop the mass executions and mistreatment of these rare species animals. Your donation 
-                    would be greatly appreciated. 
+                    The mission of St. Jude Children’s Research Hospital is to advance cures, 
+                    and means of prevention, for pediatric catastrophic diseases through research 
+                    and treatment. Consistent with the vision of our founder Danny Thomas, 
+                    no child is denied treatment based on race, religion or a family's ability to pay.
+                    If you believe in our vision, don't be afraid to donate.
                 </p>
                 
                 <form class="form-horizontal" role="form">
               <div class="form-group">
                 <div class="col-sm-2">
-                  <label for="donatinoAmount" class="control-label">Donation Amount</label>
+                  <label for="donationAmount" id="donation1" class="control-label">Donation Amount</label>
                 </div>
                 <div class="col-sm-10">
                   <input type="value" class="form-control" id="donationAmount" placeholder="Amount">
@@ -322,19 +286,20 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <a title="People for the Ethical Treatment of Animals"><h1>PETA</h1>
+              <a title="People for the Ethical Treatment of Animals"><h1>United Breast Cancer Group</h1>
             </div>
             <div class="modal-body">
                 <p>
-                    PETA is an organization that helps animals in need. Preventing the hunting of animals, for unneccassary needs.
-                    Help us in our cause to stop the mass executions and mistreatment of these rare species animals. Your donation 
-                    would be greatly appreciated. 
+                    Our mission is to help women and their loved ones make 
+                    sense of the complex medical and personal information 
+                    about breast health and breast cancer, 
+                    so they can make the best decisions for their lives.
                 </p>
                 
                 <form class="form-horizontal" role="form">
               <div class="form-group">
                 <div class="col-sm-2">
-                  <label for="donatinoAmount" class="control-label">Donation Amount</label>
+                  <label for="donationAmount" id="donation2" class="control-label">Donation Amount</label>
                 </div>
                 <div class="col-sm-10">
                   <input type="value" class="form-control" id="donationAmount" placeholder="Amount">
@@ -358,19 +323,20 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <a title="People for the Ethical Treatment of Animals"><h1>PETA</h1>
+              <a title="People for the Ethical Treatment of Animals"><h1>Cancer Fighters</h1>
             </div>
             <div class="modal-body">
                 <p>
-                    PETA is an organization that helps animals in need. Preventing the hunting of animals, for unneccassary needs.
-                    Help us in our cause to stop the mass executions and mistreatment of these rare species animals. Your donation 
-                    would be greatly appreciated. 
+                    For over 100 years, the American Cancer Society (ACS) has worked relentlessly 
+                    to save lives and create a world with less cancer. Together with millions of 
+                    our supporters worldwide, we help people stay 
+                    well and get well, find cures, and fight back against cancer
                 </p>
                 
                 <form class="form-horizontal" role="form">
               <div class="form-group">
                 <div class="col-sm-2">
-                  <label for="donatinoAmount" class="control-label">Donation Amount</label>
+                  <label for="donationAmount" id="donation3" class="control-label">Donation Amount</label>
                 </div>
                 <div class="col-sm-10">
                   <input type="value" class="form-control" id="donationAmount" placeholder="Amount">
@@ -394,19 +360,20 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <a title="People for the Ethical Treatment of Animals"><h1>PETA</h1>
+              <a title="People for the Ethical Treatment of Animals"><h1>Homeless Help</h1>
             </div>
             <div class="modal-body">
                 <p>
-                    PETA is an organization that helps animals in need. Preventing the hunting of animals, for unneccassary needs.
-                    Help us in our cause to stop the mass executions and mistreatment of these rare species animals. Your donation 
-                    would be greatly appreciated. 
+                    The National Alliance to End Homelessness is a leading voice on the issue of homelessness. 
+                    The Alliance analyzes policy and develops pragmatic, cost-effective policy solutions. 
+                    The Alliance works collaboratively with the public, private, and nonprofit sectors 
+                    to build state and local capacity, leading to stronger programs.
                 </p>
                 
                 <form class="form-horizontal" role="form">
               <div class="form-group">
                 <div class="col-sm-2">
-                  <label for="donatinoAmount" class="control-label">Donation Amount</label>
+                  <label for="donationAmount" id="donation4" class="control-label">Donation Amount</label>
                 </div>
                 <div class="col-sm-10">
                   <input type="value" class="form-control" id="donationAmount" placeholder="Amount">
@@ -430,55 +397,25 @@
   
   
   <script>
-	jQuery(document).ready(function($) {
-		$("#search-form").submit(function(event) {
-			// Disble the search button
-			enableSearchButton(false);
-			// Prevent the form from submitting via the browser.
-			event.preventDefault();
-			searchViaAjax();
-		});
-	});
-
-        
-	function searchViaAjax() {
-
-//		var search = {}
-//		search["username"] = $("#username").val();
-//		search["email"] = $("#email").val();
-
-		$.ajax({
-			type : "POST",
-			contentType : "application/json",
-			url : "${home}search/api/getSearchResult",
-			data : JSON.stringify(search),
-			dataType : 'json',
-			timeout : 100000,
-			success : function(data) {
-				console.log("SUCCESS: ", data);
-				display(data);
-			},
-			error : function(e) {
-				console.log("ERROR: ", e);
-				display(e);
-			},
-			done : function(e) {
-				console.log("DONE");
-				enableSearchButton(true);
-			}
-		});
-
-	}
-
-	function enableSearchButton(flag) {
-		$("#btn-search").prop("disabled", flag);
-	}
-
-	function display(data) {
-		var json = "<h4>Ajax Response</h4><pre>"
-				+ JSON.stringify(data, null, 4) + "</pre>";
-		$('#feedback').html(json);
-	}
+	$("#pastdonations").click(function(){
+//  	var q = $("donationAmount").val();
+  	$.ajax({
+  		type:"GET",
+                dataType: "json",
+  		url:"http://localhost:8084/CharityFund1.0/getAllEvents",
+  		success: function(resp){
+  			console.log(resp);
+  		}
+  	});
+  });
+  
+  function renderTrainee(resp){
+  	$("#output").html(resp);
+  }
+  function renderError(resp){
+  	$("#output").html();
+  }
+  
 </script>
 
 </body>
