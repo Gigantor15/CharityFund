@@ -2,11 +2,9 @@
 
 import com.oreo.charity.beans.*;
 import com.oreo.charity.dataTier.DataFacade;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -69,28 +67,60 @@ public void i_check_on_the_event(int arg1) throws Throwable {
 
 @When("^I see how much has been (\\d+)$")
 public void i_see_how_much_has_been(int arg1) throws Throwable {
-//    
+
+     Event event = contxt.getBean(DataFacade.class).getEvent(arg1);
+     double donationSumForEvent = contxt.getBean(DataFacade.class).sumOfDonations(event);
+     
+     System.out.println("This event has a profit of " + donationSumForEvent);
+     
+     Assert.assertNotNull(donationSumForEvent);
+     
+} 
+
     
-}
-
-
 @Then("^I can view how much is (\\d+) until the goal$")
 public void i_can_view_how_much_is_until_the_goal(int arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+   Event event = contxt.getBean(DataFacade.class).getEvent(arg1);
+   double eventGoalAmount = contxt.getBean(DataFacade.class).getEvent(arg1).getGoalAmount();
+   double currentDonationsReceived = contxt.getBean(DataFacade.class).sumOfDonations(event);
+   double untilGoalisReached = eventGoalAmount - currentDonationsReceived;
+   
+    System.out.println("We are $" + untilGoalisReached + " away from the goal Amount of " + eventGoalAmount);
+    
+    Assert.assertNull(event);
+   
 }
 
 
 @Then("^I see the goal has nothing (\\d+)$")
 public void i_see_the_goal_has_nothing(int arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+    double goalReached = 0.0;
+    Event event = contxt.getBean(DataFacade.class).getEvent(arg1);
+   double eventGoalAmount = contxt.getBean(DataFacade.class).getEvent(arg1).getGoalAmount();
+   double currentDonationsReceived = contxt.getBean(DataFacade.class).sumOfDonations(event);
+   double untilGoalisReached = eventGoalAmount - currentDonationsReceived;
+   
+   if (goalReached == untilGoalisReached)
+        System.out.println("GOAL HAS BEEN MET!!!!!!!!!!!!!!!!!!!!");
+    
+    Assert.assertNull(event);
+    Assert.assertEquals(currentDonationsReceived, untilGoalisReached);
 }
 
 
 @Then("^I see the goal has been (\\d+)$")
 public void i_see_the_goal_has_been(int arg1) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+      double goalReached = 0.0;
+    Event event = contxt.getBean(DataFacade.class).getEvent(arg1);
+   double eventGoalAmount = contxt.getBean(DataFacade.class).getEvent(arg1).getGoalAmount();
+   double currentDonationsReceived = contxt.getBean(DataFacade.class).sumOfDonations(event);
+   double untilGoalisReached = eventGoalAmount - currentDonationsReceived;
+   
+   if (currentDonationsReceived > eventGoalAmount){
+        double exceededBy = currentDonationsReceived - eventGoalAmount;
+        System.out.println("Goal Amount has exceeded by " + exceededBy);
+   }else {
+       System.out.println("Current Amount donated is " + currentDonationsReceived);
+   }
 }  
 }
