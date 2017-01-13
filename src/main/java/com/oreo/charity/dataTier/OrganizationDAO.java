@@ -23,7 +23,7 @@ public class OrganizationDAO {
 	}
         
           @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-        public List<Organization> getAll(){
+        public List<Organization> getAllOrganizations(){
             List orgsList = sessionFactory.openSession().createCriteria(Organization.class).list();
             return orgsList;
         }
